@@ -29,6 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
                 </div>
 
+                <input type="hidden" value="<?=Yii::$app->request->getCsrfToken()?>" />
             <?php ActiveForm::end(); ?>
         </div>
     </div>
