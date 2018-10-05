@@ -48,6 +48,37 @@ class User extends ActiveRecord implements IdentityInterface
         return $user;
     }
 
+    /**
+     * User manual creating constructor
+     * @param string $username
+     * @param string $email
+     * @param string $password
+     * @return User
+     */
+    public static function create(string $username, string $email, string $password) : self
+    {
+        $user = new self();
+        $user->username = $username;
+        $user->email = $email;
+        $user->setPassword(!empty($password) ? $password : Yii::$app->security->generateRandomString());
+        $user->created_at = time();
+        $user->status = self::STATUS_ACTIVE;
+        $user->auth_key = Yii::$app->security->generateRandomString();
+        return $user;
+    }
+
+    /**
+     * @param string $username
+     * @param string $email
+     * @return void
+     */
+    public function edit(string $username, string $email) : void
+    {
+        $this->username = $username;
+        $this->email = $email;
+        $this->updated_at = time();
+    }
+
     public function signupConfirmation() : void
     {
         if (!$this->status === self::STATUS_AWAIT) {

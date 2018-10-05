@@ -1,14 +1,32 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $model application\models\User */
-$this->title = 'Update User: ' . $model->id;
+/* @var $model application\forms\User\UserEditForm */
+/* @var $user application\models\User */
+
+use yii\bootstrap\ActiveForm;
+use yii\helpers\Html;
+
+$this->title = 'Update User: ' . $user->username . ' (base id #'. $user->id .')';
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $user->id, 'url' => ['view', 'id' => $user->id]];
 $this->params['breadcrumbs'][] = 'Update';
-?>
-<div class="user-update">
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+?><hr>
+
+<div class="row col-md-5 col-md-offset-3">
+    <div class="box">
+        <div class="box-body">
+
+            <?php $form = ActiveForm::begin(); ?>
+
+            <?= $form->field($model, 'username')->textInput(['maxLength' => true]) ?>
+            <?= $form->field($model, 'email')->textInput(['maxLength' => true]) ?>
+
+            <div class="form-group">
+                <?= Html::submitButton('Save', ['class' => 'btn btn-primary']) ?>
+            </div>
+
+            <?php ActiveForm::end(); ?>
+        </div>
+    </div>
 </div>

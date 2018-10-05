@@ -15,6 +15,14 @@ use application\forms\LoginForm;
 class SiteController extends Controller
 {
     private $authService;
+
+    /**
+     * Backend SiteController constructor.
+     * @param string $id
+     * @param Module $module
+     * @param AuthService $authService
+     * @param array $config
+     */
     public function __construct(string $id, Module $module, AuthService $authService, array $config = [])
     {
         parent::__construct($id, $module, $config);
@@ -63,7 +71,7 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionLogin()
+    public function actionLogin() : string
     {
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
@@ -86,7 +94,7 @@ class SiteController extends Controller
 
     }
 
-    public function actionLogout() : string
+    public function actionLogout() : object
     {
         Yii::$app->user->logout();
         return $this->goHome();

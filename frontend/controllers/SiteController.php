@@ -16,6 +16,16 @@ class SiteController extends Controller
 {
     private $passwordResetService, $feedbackService, $signupService, $authService;
 
+    /**
+     * Frontend SiteController constructor.
+     * @param string $id
+     * @param Module $module
+     * @param AuthService $authService
+     * @param SignupService $signupService
+     * @param PasswordResetService $passwordResetService
+     * @param FeedbackService $feedbackService
+     * @param array $config
+     */
     public function __construct(
         string $id,
         Module $module,
