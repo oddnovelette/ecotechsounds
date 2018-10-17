@@ -8,8 +8,14 @@ $params = array_merge(
 
 return [
     'id' => 'app-frontend',
+    'name' => 'ecotechsounds',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log', 'common\bootstrap\Container'],
+    'bootstrap' => ['log', 'common\bootstrap\Container', 'frontend\bootstrap\Container'],
+    'aliases' => [
+        '@uploadsRoot' => $params['uploadsPath'],
+        '@uploads'   => $params['uploadsHostInfo'],
+    ],
+    'layout' => 'blank',
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'request' => [

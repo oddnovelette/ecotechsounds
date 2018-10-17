@@ -42,10 +42,12 @@ class SiteController extends Controller
         $this->feedbackService = $feedbackService;
     }
 
+    public $layout = 'blank';
+
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
+    public function behaviors() : array
     {
         return [
             'access' => [
@@ -67,7 +69,7 @@ class SiteController extends Controller
             'verbs' => [
                 'class' => VerbFilter::class,
                 'actions' => [
-                    'logout' => ['post'],
+                    'logout' => ['get'],
                 ],
             ],
         ];
@@ -76,7 +78,7 @@ class SiteController extends Controller
     /**
      * {@inheritdoc}
      */
-    public function actions()
+    public function actions() : array
     {
         return [
             'error' => [
@@ -96,6 +98,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $this->layout = 'home';
         return $this->render('index');
     }
 

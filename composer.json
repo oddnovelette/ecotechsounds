@@ -21,7 +21,10 @@
         "yiisoft/yii2-redis": "^2.0",
         "dmstr/yii2-adminlte-asset": "^2.1",
         "kartik-v/yii2-widgets": "*",
-        "kartik-v/yii2-field-range": "dev-master"
+        "kartik-v/yii2-field-range": "dev-master",
+        "la-haute-societe/yii2-save-relations-behavior": "*",
+        "yii-dream-team/yii2-upload-behavior": " 1.1",
+        "bower-asset/font-awesome": " 4.7"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
