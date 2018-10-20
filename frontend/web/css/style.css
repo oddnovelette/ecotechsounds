@@ -4,14 +4,14 @@ html {
 }
 body {
 	font: 400 15px/1.8 Lato, sans-serif;
-	color: #777;
+	color: #333;
 	margin-bottom: 60px;
 }
 h3, h4 {
 	margin: 10px 0 30px 0;
 	letter-spacing: 10px;
 	font-size: 40px;
-	color: #111;
+	color: #777;
 }
 .container {
 	padding: 80px 120px;
@@ -149,54 +149,105 @@ footer a {
 	content: "\00bb ";
 }
 .breadcrumb {
-	font-size: 12px;
+	font-size: 10px;
 	font-weight: bold;
-
-	color: #999999;
+	letter-spacing: 4px;
+	color: #333;
+	background: none;
 	text-transform: uppercase;
 }
-
-.material-switch > input[type="checkbox"] {
-	display: none;
+.blog-posts-item {
+	margin: 20px 0;
+	padding: 20px 0;
+	border-top: 1px solid #eee;
 }
-
-.material-switch > label {
+#comments .comment-item .comment-reply {
+	color: #337ab7;
+	text-decoration: none;
+	font-weight: bold;
 	cursor: pointer;
-	height: 0px;
-	position: relative;
-	width: 40px;
 }
+#comments .margin {
+	margin-left: 40px;
+}
+#comments .comment-item .comment-item .comment-item .comment-item .comment-item .comment-item .comment-item .margin {
+	margin-left: 0;
+}
+h1 {font-size: 50px; font-weight: bold; text-transform: uppercase;}
+.post-text {
+	font-size: 17px!important;
+	text-align: justify;
+	padding-top: 25px;
+}
+.post-text:first-letter{font-size: 45px; display: block; float: left; padding-right: 20px;}
+.post-date {
+	 font-size: 14px;
+	 width: 60%;
+	 letter-spacing: 3px;
+	 color: #fff;
+ }
+.post-cat-active {
+	font-size: 14px;
+	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing: 3px;
+	color: #000;
+	padding-top: 4px;
+	padding-bottom: 5px;
+}
+.col-sm-12 {padding-right: 0;}
+a:hover {text-decoration: none;}
+.post-cat {
+	font-size: 14px;
+	text-align: center;
+	text-transform: uppercase;
+	letter-spacing: 3px;
+	color: #555;
+	font-weight: 100;
 
-.material-switch > label::before {
-	background: rgb(0, 0, 0);
-	box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
-	border-radius: 8px;
-	content: '';
-	height: 16px;
-	margin-top: -8px;
-	position:absolute;
-	opacity: 0.3;
-	transition: all 0.4s ease-in-out;
-	width: 40px;
 }
-.material-switch > label::after {
-	background: rgb(255, 255, 255);
-	border-radius: 16px;
-	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
-	content: '';
-	height: 24px;
-	left: -4px;
-	margin-top: -8px;
-	position: absolute;
-	top: -4px;
-	transition: all 0.3s ease-in-out;
-	width: 24px;
+.cat { border-bottom: 3px solid #333333;}
+
+.panel-default {
+	border-radius: 0;
+	border: 2px solid #eeeeee;
 }
-.material-switch > input[type="checkbox"]:checked + label::before {
-	background: inherit;
-	opacity: 0.5;
+.post-title {
+	font-size: 50px;
+	text-transform: uppercase;
+	letter-spacing: 5px;
+	color: #fff;
+	margin-bottom: -10px;
 }
-.material-switch > input[type="checkbox"]:checked + label::after {
-	background: inherit;
-	left: 20px;
+.post-title-list a, .post-title-list {
+	font-size: 35px;
+	text-transform: uppercase;
+	letter-spacing: 5px;
+	color: #fff;
+	margin-bottom: -10px;
+}
+.widget-posts, .widget-posts a {
+	font-size: 14px;
+	color: #eeeeee;
+	letter-spacing: 3px;
+	font-weight: bold;
+}
+.bg-1 p {
+	font-style: normal;
+}
+.post-credentials {
+	border-top: 2px solid #cccccc;
+	padding-top: 30px;
+	margin-top: 20px;
+}
+.like {
+	color: #666;
+	padding: 4px;
+	font-size: 21px;
+}
+.like:hover {
+	color: red;
+}
+.author {
+
 }

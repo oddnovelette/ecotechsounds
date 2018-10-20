@@ -11,6 +11,12 @@ return [
         '' => 'site/index',
         '<_a:about|contact|signup|login|logout>' => 'site/<_a>',
 
+        'blog' => 'blog/post/index',
+        'blog/tag/<slug:[\w\-]+>' => 'blog/post/tag',
+        'blog/<id:\d+>' => 'blog/post/post',
+        'blog/<id:\d+>/comment' => 'blog/post/comment',
+        'blog/<slug:[\w\-]+>' => 'blog/post/category',
+
         'profile' => 'profile/default/index',
         'profile/<_c:[\w\-]+>' => 'profile/<_c>/index',
         'profile/<_c:[\w\-]+>/<id:\d+>' => 'profile/<_c>/view',

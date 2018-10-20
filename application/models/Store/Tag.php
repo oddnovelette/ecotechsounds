@@ -12,6 +12,19 @@ use yii\db\ActiveRecord;
  */
 class Tag extends ActiveRecord
 {
+    public function behaviors() : array
+    {
+        return [
+            [
+                'class' => 'yii\behaviors\SluggableBehavior',
+                'attribute' => 'name',
+                'slugAttribute' => 'slug',
+                'immutable'=> false,
+                'ensureUnique' => true
+            ]
+        ];
+    }
+
     public static function create(string $name, string $slug) : self
     {
         $tag = new self();

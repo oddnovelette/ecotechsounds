@@ -1,6 +1,9 @@
 <?php
 
 /* @var $this \yii\web\View */
+
+use frontend\widgets\Blog\LastPostsWidget;
+
 /* @var $content string */
 
 ?>
@@ -63,39 +66,13 @@
 <!-- Container (TOUR Section) -->
 <div id="tour" class="bg-1">
     <div class="container">
-        <h3 class="text-center">TOUR DATES</h3>
-        <p class="text-center">Lorem ipsum we'll play you some music.<br> Remember to book your tickets!</p>
-        <ul class="list-group">
-            <li class="list-group-item">September <span class="label label-danger">Sold Out!</span></li>
-            <li class="list-group-item">October <span class="label label-danger">Sold Out!</span></li>
-            <li class="list-group-item">November <span class="badge">3</span></li>
-        </ul>
+        <h3 class="text-center">Latest from magazine</h3>
+        <div class="row">
+        <?= LastPostsWidget::widget([
+            'limit' => 4,
+        ]) ?>
+        </div>
 
-        <div class="row text-center">
-            <div class="col-sm-4">
-                <div class="thumbnail">
-                    <img src="paris.jpg" alt="Paris" width="400" height="300">
-                    <p><strong>Paris</strong></p>
-                    <p>Friday 27 November 2015</p>
-                    <button class="btn" data-toggle="modal" data-target="#myModal">Buy Tickets</button>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="thumbnail">
-                    <img src="newyork.jpg" alt="New York" width="400" height="300">
-                    <p><strong>New York</strong></p>
-                    <p>Saturday 28 November 2015</p>
-                    <button class="btn" data-toggle="modal" data-target="#myModal">Buy Tickets</button>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="thumbnail">
-                    <img src="sanfran.jpg" alt="San Francisco" width="400" height="300">
-                    <p><strong>San Francisco</strong></p>
-                    <p>Sunday 29 November 2015</p>
-                    <button class="btn" data-toggle="modal" data-target="#myModal">Buy Tickets</button>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -133,7 +110,7 @@
             </div>
         </div>
     </div>
-</div>
+
 
 <!-- Container (Contact Section) -->
 <div id="contact" class="container">
@@ -160,7 +137,7 @@
             <br>
             <div class="row">
                 <div class="col-md-12 form-group">
-                    <button class="btn pull-right" type="submit">Send</button>
+                    <button class="btn btn-info pull-right btn-lg" type="submit">Send</button>
                 </div>
             </div>
         </div>

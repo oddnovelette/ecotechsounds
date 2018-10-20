@@ -15,6 +15,20 @@ class Label extends ActiveRecord
 {
     public $meta;
 
+    public function behaviors() : array
+    {
+        return [
+            [
+                'class' => 'yii\behaviors\SluggableBehavior',
+                'attribute' => 'name',
+                'slugAttribute' => 'slug',
+                'immutable'=> false,
+                'ensureUnique' => true
+            ],
+            MetaTagsBehavior::class,
+        ];
+    }
+
     /**
      * Label named constructor
      * @param string $name
@@ -47,12 +61,5 @@ class Label extends ActiveRecord
     public static function tableName() : string
     {
         return '{{%store_labels}}';
-    }
-
-    public function behaviors() : array
-    {
-        return [
-            MetaTagsBehavior::class,
-        ];
     }
 }

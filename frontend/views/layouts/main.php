@@ -4,6 +4,7 @@
 /* @var $content string */
 
 use frontend\assets\AppAsset;
+use frontend\widgets\Blog\LastPostsWidget;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use common\widgets\Alert;
@@ -44,7 +45,7 @@ AppAsset::register($this);
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="<?= Html::encode(Yii::$app->homeUrl) ?>">Home</a></li>
-                <li><a href="#band">Magazine</a></li>
+                <li><a href="<?= Html::encode(Url::to('/blog/post/index')) ?>">Magazine</a></li>
                 <li><a href="#band">Residents</a></li>
                 <li><a href="#band">Works</a></li>
                 <li><a href="#tour">Store</a></li>
@@ -81,6 +82,7 @@ AppAsset::register($this);
 <?php if (Url::current() !== Yii::$app->homeUrl): ?>
 <div class="container">
     <?php endif; ?>
+
     <?= Breadcrumbs::widget(['links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [], 'homeLink' => false]) ?>
 
     <?= Alert::widget() ?>
@@ -89,19 +91,19 @@ AppAsset::register($this);
 </div>
 
 <!-- Footer -->
-<footer>
+    <footer>
 
-                <a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TO TOP">
-                    <span class="glyphicon glyphicon-chevron-up"></span>
-                </a><br><br>
-                <p>Copyright &copy;
-                    <a href="<?= Html::encode(Yii::$app->homeUrl) ?>" data-toggle="tooltip" title="<?=  Html::encode(Yii::$app->name) ?>">
-                        <?= date('Y') ?>.
-                            <?=  Html::encode(Yii::$app->name) ?>
-                    </a>
-                </p>
+        <a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TO TOP">
+            <span class="glyphicon glyphicon-chevron-up"></span>
+        </a><br><br>
+        <p>Copyright &copy;
+            <a href="<?= Html::encode(Yii::$app->homeUrl) ?>" data-toggle="tooltip" title="<?=  Html::encode(Yii::$app->name) ?>">
+                <?= date('Y') ?>.
+                    <?=  Html::encode(Yii::$app->name) ?>
+            </a>
+        </p>
 
-</footer>
+    </footer>
 
 <?php $this->endBody() ?>
 <script>

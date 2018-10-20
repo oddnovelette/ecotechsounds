@@ -4,7 +4,6 @@ namespace application\services\Store;
 use application\models\Meta;
 use application\models\Store\Label;
 use application\forms\Store\LabelForm;
-use yii\helpers\Inflector;
 
 /**
  * Class LabelService
@@ -20,7 +19,7 @@ class LabelService
      */
     public function create(LabelForm $form) : Label
     {
-        $label = Label::create($form->name, $form->slug ?? Inflector::slug($form->name),
+        $label = Label::create($form->name, $form->slug,
             new Meta(
                 $form->meta->title,
                 $form->meta->description,
@@ -44,7 +43,7 @@ class LabelService
         if (!$label = Label::findOne($id)) {
             throw new \RuntimeException('Label is not found.');
         }
-        $label->edit($form->name, $form->slug ?? Inflector::slug($form->name),
+        $label->edit($form->name, $form->slug,
             new Meta(
                 $form->meta->title,
                 $form->meta->description,
@@ -52,8 +51,9 @@ class LabelService
             )
         );
         if (!$label->save()) {
-            throw new \RuntimeException('Saving error.');
+            throw new \RuntimeException('Label saving error occured.');
         }
+        return;
     }
 
     /**

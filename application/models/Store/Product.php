@@ -59,7 +59,7 @@ class Product extends ActiveRecord
         $this->price = $price;
         $this->meta = $meta;
         $this->updated_at = time();
-        return null;
+        return;
     }
 
     public function getLabel() : ActiveQuery
@@ -99,7 +99,7 @@ class Product extends ActiveRecord
             if ($photo->isIdEqualTo($id)) {
                 unset($photos[$i]);
                 $this->updatePhotos($photos);
-                return null;
+                return;
             }
         }
         throw new \DomainException('Photo is not found.');
@@ -120,7 +120,7 @@ class Product extends ActiveRecord
                     $photos[$i] = $prev;
                     $this->updatePhotos($photos);
                 }
-                return null;
+                return;
             }
         }
         throw new \DomainException('Photo is not found.');
@@ -136,7 +136,7 @@ class Product extends ActiveRecord
                     $photos[$i + 1] = $photo;
                     $this->updatePhotos($photos);
                 }
-                return null;
+                return;
             }
         }
         throw new \DomainException('Photo is not found.');
@@ -170,7 +170,7 @@ class Product extends ActiveRecord
         $assignments = $this->tagAssignments;
         foreach ($assignments as $assignment) {
             if ($assignment->isForTag($id)) {
-                return null;
+                return;
             }
         }
         $assignments[] = TagAssignment::create($id);
@@ -184,7 +184,7 @@ class Product extends ActiveRecord
             if ($assignment->isForTag($id)) {
                 unset($assignments[$i]);
                 $this->tagAssignments = $assignments;
-                return null;
+                return;
             }
         }
         throw new \DomainException('Assignment is not found.');

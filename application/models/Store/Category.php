@@ -21,6 +21,20 @@ class Category extends ActiveRecord
 {
     public $meta;
 
+    public function behaviors() : array
+    {
+        return [
+            [
+                'class' => 'yii\behaviors\SluggableBehavior',
+                'attribute' => 'name',
+                'slugAttribute' => 'slug',
+                'immutable'=> false,
+                'ensureUnique' => true
+            ],
+            MetaTagsBehavior::class,
+        ];
+    }
+
     public static function create(string $name, string $slug, string $title, string $description, int $sort, Meta $meta) : self
     {
         $category = new self();
@@ -41,6 +55,7 @@ class Category extends ActiveRecord
         $this->description = $description;
         $this->sort = $sort;
         $this->meta = $meta;
+        return;
     }
 
     public function getSeoTitle() : string
@@ -56,12 +71,5 @@ class Category extends ActiveRecord
     public static function tableName() : string
     {
         return '{{%store_categories}}';
-    }
-
-    public function behaviors() : array
-    {
-        return [
-            MetaTagsBehavior::class,
-        ];
     }
 }

@@ -5,14 +5,17 @@ use application\models\Meta;
 use application\models\Store\Category;
 use application\forms\store\CategoryForm;
 use application\models\Store\Product;
-use yii\helpers\Inflector;
 
+/**
+ * Class CategoryService
+ * @package application\services\store
+ */
 class CategoryService
 {
     public function create(CategoryForm $form) : Category
     {
         $category = Category::create(
-            $form->name, $form->slug ?? Inflector::slug($form->name), $form->title, $form->description, $form->sort,
+            $form->name, $form->slug, $form->title, $form->description, $form->sort,
             new Meta(
                 $form->meta->title,
                 $form->meta->description,
@@ -32,7 +35,7 @@ class CategoryService
             throw new \RuntimeException('Category is not found.');
         }
 
-        $category->edit($form->name, $form->slug ?? Inflector::slug($form->name), $form->title, $form->description, $form->sort,
+        $category->edit($form->name, $form->slug, $form->title, $form->description, $form->sort,
             new Meta(
                 $form->meta->title,
                 $form->meta->description,
@@ -42,6 +45,7 @@ class CategoryService
         if (!$category->save()) {
             throw new \RuntimeException('Category saving error occured.');
         }
+        return;
     }
 
     public function remove($id) : void

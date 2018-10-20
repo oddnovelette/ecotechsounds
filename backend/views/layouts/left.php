@@ -5,7 +5,7 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
+                <img src="https://t4.ftcdn.net/jpg/02/06/12/43/160_F_206124303_p6rm6135nqCP5bUhyuOCseKwfnNEGG8w.jpg" class="img-circle" alt="User Image"/>
             </div>
             <div class="pull-left info">
                 <p><?= Yii::$app->user->identity->username ?></p>
@@ -26,6 +26,12 @@
                         ['label' => 'Tags', 'icon' => 'file-o', 'url' => ['/store/tag/index'], 'active' => $this->context->id == 'store/tag'],
                         ['label' => 'Categories', 'icon' => 'file-o', 'url' => ['/store/category/index'], 'active' => $this->context->id == 'store/category'],
                         ['label' => 'Labels', 'icon' => 'file-o', 'url' => ['/store/label/index'], 'active' => $this->context->id == 'store/label'],
+                    ]],
+                    ['label' => 'Magazine', 'icon' => 'folder', 'items' => [
+                        ['label' => 'Posts', 'icon' => 'file-o', 'url' => ['/blog/post/index'], 'active' => $this->context->id == 'blog/post'],
+                        ['label' => 'Comments', 'icon' => 'file-o', 'url' => ['/blog/comment/index'], 'active' => $this->context->id == 'blog/comment'],
+                        ['label' => 'Categories', 'icon' => 'file-o', 'url' => ['/blog/category/index'], 'active' => $this->context->id == 'blog/category'],
+                        ['label' => 'Tags', 'icon' => 'file-o', 'url' => ['/blog/tag/index'], 'active' => $this->context->id == 'blog/tag'],
                     ]],
 
                     ['label' => 'Users', 'icon' => 'user', 'url' => ['/user/index'], 'active' => $this->context->id == 'user/index'],

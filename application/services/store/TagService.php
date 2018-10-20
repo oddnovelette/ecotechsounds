@@ -3,7 +3,6 @@ namespace application\services\Store;
 
 use application\models\Store\Tag;
 use application\forms\Store\TagForm;
-use yii\helpers\Inflector;
 
 /**
  * Class TagService
@@ -18,7 +17,7 @@ class TagService
      */
     public function create(TagForm $form) : Tag
     {
-        $tag = Tag::create($form->name, $form->slug ?? Inflector::slug($form->name));
+        $tag = Tag::create($form->name, $form->slug);
         if (!$tag->save()) {
             throw new \RuntimeException('Store tag saving error occured.');
         }
@@ -37,10 +36,11 @@ class TagService
             throw new \RuntimeException('Store tag is not found.');
         }
 
-        $tag->edit($form->name, $form->slug ?? Inflector::slug($form->name));
+        $tag->edit($form->name, $form->slug);
         if (!$tag->save()) {
             throw new \RuntimeException('Store tag saving error occured.');
         }
+        return;
     }
 
     /**

@@ -1,6 +1,7 @@
 <?php
 namespace application\models;
 
+use application\models\Blog\Post;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
@@ -9,6 +10,7 @@ use yii\web\IdentityInterface;
 
 /**
  * User model
+ * @package common\models
  *
  * @property integer $id
  * @property string $username
@@ -21,7 +23,6 @@ use yii\web\IdentityInterface;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
- * @package common\models
  */
 class User extends ActiveRecord implements IdentityInterface
 {

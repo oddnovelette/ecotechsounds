@@ -25,7 +25,7 @@ class ProductService
         $product = Product::create(
             $label->id,
             $category->id,
-            $form->code ?? $form->id,
+            $form->code,
             $form->name,
             $form->description,
             $form->price,
@@ -79,7 +79,7 @@ class ProductService
         $product->edit(
             $label->id,
             $category->id,
-            $form->code ?? $form->id,
+            $form->code,
             $form->name,
             $form->description,
             $form->price,
