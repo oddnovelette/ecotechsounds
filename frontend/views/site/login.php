@@ -13,7 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="row">
     <div class="col-lg-5">
         <div class="site-login">
-
                 <p>Please fill out the following fields to login:</p>
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 

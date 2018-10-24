@@ -3,6 +3,10 @@ namespace application\models\Blog;
 
 use yii\db\ActiveQuery;
 
+/**
+ * Class PostQuery
+ * @package application\models\Blog
+ */
 class PostQuery extends ActiveQuery
 {
     /**

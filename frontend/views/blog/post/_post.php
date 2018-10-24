@@ -6,7 +6,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$url = Url::to(['post', 'id' =>$model->id]);
+$url = Url::to(['post', 'slug' => $model->slug]);
 ?>
 
 <div class="blog-posts-item">
@@ -25,5 +25,5 @@ $url = Url::to(['post', 'id' =>$model->id]);
             <span class="glyphicon glyphicon-comment"></span> <?= $model->comments_counter ?>
                 <span class="glyphicon glyphicon-heart"></span> <?= $model->likes_counter ?></span>
     </p>
-    <p><?= Yii::$app->formatter->asNtext($model->description) ?></p>
+    <p class="post-text-preview"><?= Yii::$app->formatter->asNtext($model->description) ?></p>
 </div>

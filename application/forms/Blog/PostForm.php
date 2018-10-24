@@ -15,21 +15,25 @@ class PostForm extends Embedded
 {
     public $categoryId;
     public $title;
+    public $slug;
     public $description;
     public $language;
     public $content;
     public $photo;
+    private $_post;
 
     public function __construct(Post $post = null, array $config = [])
     {
         if ($post) {
             $this->categoryId = $post->category_id;
             $this->title = $post->title;
+            $this->slug = $post->slug;
             $this->description = $post->description;
             $this->language = $post->language;
             $this->content = $post->content;
             $this->meta = new MetaTagsForm($post->meta);
             $this->tags = new TagsForm($post);
+            $this->_post = $post;
         } else {
             $this->meta = new MetaTagsForm();
             $this->tags = new TagsForm();
@@ -42,6 +46,7 @@ class PostForm extends Embedded
         return [
             [['categoryId', 'title', 'language'], 'required'],
             [['title', 'language'], 'string', 'max' => 255],
+            [['title', 'slug'], 'unique', 'targetClass' => Post::class, 'filter' => $this->_post ? ['<>', 'id', $this->_post->id] : null],
             [['categoryId'], 'integer'],
             [['description', 'content'], 'string'],
             [['photo'], 'image'],

@@ -25,8 +25,10 @@ foreach ($post->tags as $tag) {
             <?= Yii::$app->formatter->format($post->created_at, 'relativeTime'); ?>
             in <?= Html::encode($post->category->name) ?> <?= Html::encode(strtoupper($post->language)) ?>&nbsp;&nbsp;
         <span class="glyphicon glyphicon-eye-open"></span> <?= $post->views_counter ?>
-        <span class="glyphicon glyphicon-comment"></span> <?= $post->comments_counter ?></span>
+        <span class="glyphicon glyphicon-comment"></span> <?= $post->comments_counter ?>
+        <span class="glyphicon glyphicon-heart"></span> <?= $post->likes_counter ?></span>
     </p>
+
     <?php if ($post->photo): ?>
         <p><img src="<?= Html::encode($post->getThumbFileUrl('photo', 'origin')) ?>" alt="" class="img-responsive" /></p>
     <?php endif; ?>
@@ -36,10 +38,22 @@ foreach ($post->tags as $tag) {
 
 <div class="row post-credentials">
     <div class="col-md-6">
-        Like <a href="#" class="glyphicon glyphicon-heart-empty like btn btn-lg" data-id="<?=$post->id?>"></a>
+        <div class="col-md-6">
+
+                <a href="#" data-id="<?= $post->id ?>" class="btn btn-sm button-unlike <?=(\application\models\User::findIdentity(Yii::$app->user->id) and !\application\models\User::findIdentity(Yii::$app->user->id)->postAlreadyLiked($post->id)) ? "" : "hidden";?>">
+                <span class="glyphicon glyphicon-heart"></span>
+                </a>
+
+                <a href="#" data-id="<?= $post->id ?>" class="btn btn-sm button-like <?=(\application\models\User::findIdentity(Yii::$app->user->id) and !\application\models\User::findIdentity(Yii::$app->user->id)->postAlreadyLiked($post->id)) ? "hidden" : "";?>">
+                <span class="button-like glyphicon glyphicon-heart-empty"></span>
+                </a>
+            <span class="likes"><?=$post->likes_counter ?></span>
+        </div>
     </div>
 
     <div class="col-md-6">
+
+
     <div class="author">By <?= Html::encode($post->user->username) ?></div>
     </div>
 
@@ -49,33 +63,40 @@ foreach ($post->tags as $tag) {
 
 <?= BlogCommentsWidget::widget(['post' => $post]) ?>
 
+
 <?php $this->registerJs("
     $(document).ready(function () {
-    $('a.like').click(function () { 
+    
+    $('a.button-like').click(function () {
         var button = $(this);
         var params = {
             'id': $(this).attr('data-id')
         };        
-        $.post('/blog/post/like', params, function(data) {
+        
+        $.post('/profile/like/add', params, function(data) {
+
             if (data.success) {
-                button.hide();
-                button.siblings('.button-unlike').show();
-                button.siblings('.likes-count').html(data.likesCount);
-            }
+            $('a.button-like').addClass('hidden');
+            $('a.button-unlike').removeClass('hidden');
+            $('.likes').html(data.likes);
+            }      
         });
         return false;
     });
 
-    $('a.button-unlike').click(function () { 
+    $('a.button-unlike').click(function () {
+
         var button = $(this);
         var params = {
             'id': $(this).attr('data-id')
         };        
-        $.post('/blog/post/unlike', params, function(data) {
+        
+        $.post('/profile/like/delete', params, function(data) {
+        
             if (data.success) {
-                button.hide();
-                button.siblings('.button-like').show();
-                button.siblings('.likes-count').html(data.likesCount);
+            $('a.button-unlike').addClass('hidden');
+            $('a.button-like').removeClass('hidden');
+            $('.likes').html(data.likes);
             }
         });
         return false;
@@ -83,3 +104,4 @@ foreach ($post->tags as $tag) {
 });
 
 "); ?>
+

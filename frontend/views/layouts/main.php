@@ -4,10 +4,8 @@
 /* @var $content string */
 
 use frontend\assets\AppAsset;
-use frontend\widgets\Blog\LastPostsWidget;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use common\widgets\Alert;
 use yii\widgets\Breadcrumbs;
 
 AppAsset::register($this);
@@ -34,6 +32,7 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
+
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                 <span class="icon-bar"></span>
@@ -45,7 +44,7 @@ AppAsset::register($this);
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="<?= Html::encode(Yii::$app->homeUrl) ?>">Home</a></li>
-                <li><a href="<?= Html::encode(Url::to('/blog/post/index')) ?>">Magazine</a></li>
+                <li><a href="<?= Html::encode(Url::to('/magazine')) ?>">Magazine</a></li>
                 <li><a href="#band">Residents</a></li>
                 <li><a href="#band">Works</a></li>
                 <li><a href="#tour">Store</a></li>
@@ -60,6 +59,7 @@ AppAsset::register($this);
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="<?= Html::encode(Url::to('/profile/default')) ?>">Profile</a></li>
+                        <li><a href="<?= Html::encode(Url::to('/profile/like/index')) ?>">Collection</a></li>
                         <li><a href="<?= Html::encode(Url::to('/site/logout')) ?>">Sign out</a></li>
                     </ul>
                 </li>
@@ -79,15 +79,15 @@ AppAsset::register($this);
         </div>
     </div>
 </nav>
+
 <?php if (Url::current() !== Yii::$app->homeUrl): ?>
 <div class="container">
     <?php endif; ?>
 
     <?= Breadcrumbs::widget(['links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [], 'homeLink' => false]) ?>
-
-    <?= Alert::widget() ?>
-
+    <?= \lavrentiev\widgets\toastr\NotificationFlash::widget() ?>
     <?= $content ?>
+
 </div>
 
 <!-- Footer -->

@@ -14,8 +14,6 @@ class m181005_175052_create_store_labels_table extends Migration
         $this->createTable('{{%store_labels}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string()->notNull(),
-            'photo_id', $this->integer(),
-            'description' => $this->string(),
             'slug' => $this->string()->notNull(),
             'meta_json' => 'JSON NOT NULL',
         ], $tableOptions);

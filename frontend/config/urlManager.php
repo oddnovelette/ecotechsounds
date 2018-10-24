@@ -11,11 +11,13 @@ return [
         '' => 'site/index',
         '<_a:about|contact|signup|login|logout>' => 'site/<_a>',
 
-        'blog' => 'blog/post/index',
-        'blog/tag/<slug:[\w\-]+>' => 'blog/post/tag',
-        'blog/<id:\d+>' => 'blog/post/post',
+        'page/<slug:[\w\-]+>' => 'page/view',
+
+        'magazine' => 'blog/post/index',
+        'magazine/tag/<slug:[\w\-]+>' => 'blog/post/tag',
+        'magazine/<slug:[\w\-]+>' => 'blog/post/post',
         'blog/<id:\d+>/comment' => 'blog/post/comment',
-        'blog/<slug:[\w\-]+>' => 'blog/post/category',
+        'magazine/category/<slug:[\w\-]+>' => 'blog/post/category',
 
         'profile' => 'profile/default/index',
         'profile/<_c:[\w\-]+>' => 'profile/<_c>/index',

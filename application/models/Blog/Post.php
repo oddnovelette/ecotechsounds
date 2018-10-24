@@ -41,6 +41,7 @@ use yiidreamteam\upload\ImageUploadBehavior;
  * @property TagAssignment[] $tagAssignments
  * @property Tag[] $tags
  * @property Comment[] $comments
+ * @property PostLike[] $postLikes
  *
  * @mixin ImageUploadBehavior
  */
@@ -55,11 +56,12 @@ class Post extends ActiveRecord implements Linkable
 
     public $meta;
 
-    public static function create($categoryId, $title, $description, $language, $content, Meta $meta) : self
+    public static function create($categoryId, $title, $slug, $description, $language, $content, Meta $meta) : self
     {
         $post = new self();
         $post->category_id = $categoryId;
         $post->title = $title;
+        $post->slug = $slug;
         $post->description = $description;
         $post->language = $language;
         $post->content = $content;
@@ -71,10 +73,11 @@ class Post extends ActiveRecord implements Linkable
         return $post;
     }
 
-    public function edit($categoryId, $title, $description, $language, $content, Meta $meta) : void
+    public function edit($categoryId, $title, $slug, $description, $language, $content, Meta $meta) : void
     {
         $this->category_id = $categoryId;
         $this->title = $title;
+        $this->slug = $slug;
         $this->description = $description;
         $this->language = $language;
         $this->content = $content;
@@ -211,6 +214,16 @@ class Post extends ActiveRecord implements Linkable
         ]);
     }
 
+    public static function getLikeList($userId) : ActiveDataProvider
+    {
+        return new ActiveDataProvider([
+            'query' => Post::find()
+                ->alias('p')->published('p')
+                ->joinWith('postLikes w', false, 'INNER JOIN')
+                ->andWhere(['w.user_id' => $userId]),
+            'sort' => false,
+        ]);
+    }
 
     public function revokeTags(): void
     {
@@ -323,6 +336,11 @@ class Post extends ActiveRecord implements Linkable
         return $this->hasMany(Comment::class, ['post_id' => 'id']);
     }
 
+    public function getPostLikes() : ActiveQuery
+    {
+        return $this->hasMany(PostLike::class, ['post_id' => 'id']);
+    }
+
     public static function tableName() : string
     {
         return '{{%blog_posts}}';
@@ -341,6 +359,13 @@ class Post extends ActiveRecord implements Linkable
     public function behaviors() : array
     {
         return [
+            [
+                'class' => 'yii\behaviors\SluggableBehavior',
+                'attribute' => 'title',
+                'slugAttribute' => 'slug',
+                'immutable'=> false,
+                'ensureUnique' => true
+            ],
             'timestamp'=> [
                 'class' => 'yii\behaviors\TimestampBehavior',
                 'createdAtAttribute' => 'created_at',
@@ -351,13 +376,6 @@ class Post extends ActiveRecord implements Linkable
                 'attributes' => [
                     BaseActiveRecord::EVENT_BEFORE_INSERT => 'user_id',
                 ]
-            ],
-            [
-                'class' => 'yii\behaviors\SluggableBehavior',
-                'attribute' => 'title',
-                'slugAttribute' => 'slug',
-                'immutable'=> false,
-                'ensureUnique' => true
             ],
             MetaTagsBehavior::class,
             [

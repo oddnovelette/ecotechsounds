@@ -2,9 +2,12 @@
 namespace application\models;
 
 use application\models\Blog\Post;
+use application\models\Blog\PostLike;
+use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
@@ -23,6 +26,7 @@ use yii\web\IdentityInterface;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
+ * @property PostLike[] $postLikes
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -104,6 +108,10 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             TimestampBehavior::class,
+            [
+                'class' => SaveRelationsBehavior::class,
+                'relations' => ['postLikes'],
+            ],
         ];
     }
 
@@ -127,6 +135,53 @@ class User extends ActiveRecord implements IdentityInterface
         }
         $this->setPassword($password);
         $this->password_reset_token = null;
+    }
+
+    /////////////// Likes & Dislikes ////////////////////
+
+    public function submitPostLike($postId) : void
+    {
+        $post_likes = $this->postLikes;
+        foreach ($post_likes as $like) {
+            if ($like->isForPost($postId)) {
+                throw new \DomainException('Post is already liked.');
+            }
+        }
+        $post_likes[] = PostLike::create($postId);
+        $this->postLikes = $post_likes;
+        $post = Post::findOne($postId);
+        $post->updateCounters(['likes_counter' => 1]);
+    }
+
+    public function postAlreadyLiked($postId) : bool
+    {
+        $post_likes = $this->postLikes;
+        foreach ($post_likes as $like) {
+            if ($like->isForPost($postId)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public function removeFromPostLikesList($postId) : void
+    {
+        $post_likes = $this->postLikes;
+        foreach ($post_likes as $i => $like) {
+            if ($like->isForPost($postId)) {
+                unset($post_likes[$i]);
+                $this->postLikes = $post_likes;
+                $post = Post::findOne($postId);
+                $post->updateCounters(['likes_counter' => -1]);
+                return;
+            }
+        }
+        throw new \DomainException('Like is not found.');
+    }
+
+    public function getPostLikes() : ActiveQuery
+    {
+        return $this->hasMany(PostLike::class, ['user_id' => 'id']);
     }
 
     /**

@@ -38,6 +38,7 @@ use yii\bootstrap\ActiveForm;
     <div class="box box-default">
         <div class="box-body">
             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'description')->textarea(['rows' => 5]) ?>
             <?= $form->field($model, 'content')->textarea(['rows' => 20]) ?>
         </div>

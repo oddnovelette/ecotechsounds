@@ -8,7 +8,6 @@ use Yii;
 use yii\base\Module;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\Response;
 
 /**
  * Class PostController
@@ -42,6 +41,7 @@ class PostController extends Controller
         if (!$category = Category::find()->andWhere(['slug' => $slug])->one()) {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+
         $dataProvider = Post::getAllByCategory($category);
 
         return $this->render('category', [
@@ -68,43 +68,19 @@ class PostController extends Controller
         ]);
     }
 
-    /**
-     * @param $id
-     * @return mixed
-     * @throws NotFoundHttpException
-     */
-    public function actionPost($id)
+    public function actionPost($slug)
     {
-        if (!$post = Post::findOne(['id' => $id, 'status' => Post::STATUS_PUBLISHED])) {
+        if (!$post = Post::findOne(['slug' => $slug, 'status' => Post::STATUS_PUBLISHED])) {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
 
         $post->processViewsCounter();
+        $user = Yii::$app->user->identity;
         return $this->render('post', [
             'post' => $post,
+            'user' => $user,
         ]);
     }
-
-    public function actionLike()
-    {
-        if (Yii::$app->user->isGuest) {
-            Yii::$app->session->setFlash('warning', 'You must be logged in for this');
-            return $this->redirect(['/site/login']);
-        }
-        Yii::$app->response->format = Response::FORMAT_JSON;
-        $id = Yii::$app->request->post('id');
-        $post = $this->findModel($id);
-
-        $user = Yii::$app->user->identity;
-        //$post->submitLike($user);
-
-        return [
-            'success' => true,
-        ];
-    }
-
-    public function actionDislike($id)
-    {}
 
     /**
      * @param $id
@@ -113,14 +89,17 @@ class PostController extends Controller
      */
     public function actionComment($id)
     {
-        if (!$post = Post::findOne($id)) {
-            throw new \RuntimeException('Post is not found.');
+        if (Yii::$app->user->isGuest) {
+            Yii::$app->session->setFlash('warning', 'You must be logged in for comments');
+            return $this->redirect(['/site/login']);
         }
+        if (!$post = Post::findOne($id)) throw new \RuntimeException('Post not found.');
+
         $form = new CommentForm();
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $comment = $this->commentService->create($post->id, Yii::$app->user->id, $form);
-                return $this->redirect(['post', 'id' => $post->id, '#' => 'comment_' . $comment->id]);
+                return $this->redirect(['post', 'slug' => $post->slug, '#' => 'comment_' . $comment->id]);
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
                 Yii::$app->session->setFlash('error', $e->getMessage());
@@ -130,14 +109,5 @@ class PostController extends Controller
             'post' => $post,
             'model' => $form,
         ]);
-    }
-
-    protected function findModel($id) : Post
-    {
-        if (($model = Post::findOne($id)) !== null) {
-            return $model;
-        }
-
-        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

@@ -100,5 +100,4 @@ class PasswordResetService
             throw new \RuntimeException('Saving error occured.');
         }
     }
-
 }

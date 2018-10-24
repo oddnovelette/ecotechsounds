@@ -2,11 +2,13 @@
 namespace application\services\Blog;
 
 use application\forms\Blog\PostForm;
-use application\models\Blog\Category;
-use application\models\Blog\Post;
-use application\models\Blog\Tag;
+use application\models\Blog\{Category, Post, Tag};
 use application\models\Meta;
 
+/**
+ * Class BlogService
+ * @package application\services\Blog
+ */
 class BlogService
 {
 
@@ -18,6 +20,7 @@ class BlogService
         $post = Post::create(
             $category->id,
             $form->title,
+            $form->slug,
             $form->description,
             $form->language,
             $form->content,
@@ -63,6 +66,7 @@ class BlogService
         $post->edit(
             $category->id,
             $form->title,
+            $form->slug,
             $form->description,
             $form->language,
             $form->content,

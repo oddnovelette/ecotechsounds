@@ -6,6 +6,7 @@ body {
 	font: 400 15px/1.8 Lato, sans-serif;
 	color: #333;
 	margin-bottom: 60px;
+	background: #f1f1f1;
 }
 h3, h4 {
 	margin: 10px 0 30px 0;
@@ -15,6 +16,7 @@ h3, h4 {
 }
 .container {
 	padding: 80px 120px;
+	background: #ffffff;
 }
 .person {
 	border: 10px solid transparent;
@@ -127,15 +129,16 @@ h3, h4 {
 	background-color: #555555 !important;
 }
 footer {
-	background-color: #eeeeee;
+	background-color: #333333;
 	font-size: 15px;
 	padding: 20px;
 	position: absolute;
 	bottom: 0;
 	width: 100%;
+	color: #ffffff;
 }
 footer a {
-	color: #333333;
+	color: #ffffff;
 }
 
 .form-control {
@@ -173,11 +176,18 @@ footer a {
 #comments .comment-item .comment-item .comment-item .comment-item .comment-item .comment-item .comment-item .margin {
 	margin-left: 0;
 }
-h1 {font-size: 50px; font-weight: bold; text-transform: uppercase;}
+h1 {font-size: 30px; font-weight: bold; text-transform: uppercase;}
 .post-text {
 	font-size: 17px!important;
 	text-align: justify;
 	padding-top: 25px;
+}
+.post-text-preview {
+	font-size: 17px!important;
+	text-align: justify;
+	padding-top: 19px;
+	padding-bottom: 19px;
+	border-bottom: 3px solid #cccccc;
 }
 .post-text:first-letter{font-size: 45px; display: block; float: left; padding-right: 20px;}
 .post-date {
@@ -240,14 +250,20 @@ a:hover {text-decoration: none;}
 	padding-top: 30px;
 	margin-top: 20px;
 }
-.like {
-	color: #666;
-	padding: 4px;
-	font-size: 21px;
+.button-unlike, .button-like  {
+	color: #FF6363;
+	font-size: 25px;
+	height: 45px;
 }
-.like:hover {
-	color: red;
+.likes{
+	font-size: 18px;
+	font-weight: bold;
+	color: #999999;
 }
 .author {
 
+}
+.gl-profile{
+	color: #999999;
+	padding-right: 7px;
 }

@@ -38,6 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'model' => $post,
                 'attributes' => [
                     'id',
+                    'slug',
                     [
                         'attribute' => 'status',
                         'value' => PostHelper::statusLabel($post->status),
