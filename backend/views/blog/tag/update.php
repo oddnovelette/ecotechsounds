@@ -1,8 +1,8 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $tag application\models\Blog\Tag */
-/* @var $model application\forms\Blog\TagForm */
+/* @var $tag src\models\Blog\Tag */
+/* @var $model src\forms\Blog\TagForm */
 
 $this->title = 'Update Tag: ' . $tag->name;
 $this->params['breadcrumbs'][] = ['label' => 'Tags', 'url' => ['index']];

@@ -1,7 +1,7 @@
 <?php
 namespace backend\forms\Blog;
 
-use application\models\Blog\Comment;
+use src\models\Blog\Comment;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;

@@ -1,7 +1,7 @@
 <?php
 
-use application\helpers\UserHelper;
-use application\models\User;
+use src\helpers\UserHelper;
+use src\models\User;
 use kartik\date\DatePicker;
 use yii\helpers\Html;
 use yii\grid\{GridView, ActionColumn};

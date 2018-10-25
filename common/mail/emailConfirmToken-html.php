@@ -1,8 +1,10 @@
 <?php
+
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $user \application\models\User */
+/* @var $user \src\models\User */
+
 $confirmLink = Yii::$app->urlManager->createAbsoluteUrl(['site/confirm', 'token' => $user->email_confirm_token]);
 ?>
 <div class="password-reset">

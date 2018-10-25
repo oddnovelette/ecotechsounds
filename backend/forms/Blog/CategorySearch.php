@@ -3,7 +3,7 @@ namespace backend\forms\Blog;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use application\models\Blog\Category;
+use src\models\Blog\Category;
 
 /**
  * Class CategorySearch

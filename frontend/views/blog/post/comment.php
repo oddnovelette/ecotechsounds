@@ -1,8 +1,8 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $post application\models\Blog\Post */
-/* @var $model \application\forms\Blog\CommentForm */
+/* @var $post src\models\Blog\Post */
+/* @var $model \src\forms\Blog\CommentForm */
 
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;

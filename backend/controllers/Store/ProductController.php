@@ -1,10 +1,10 @@
 <?php
 namespace backend\controllers\store;
 
-use application\forms\Store\Product\{PhotosForm, ProductForm};
-use application\services\Store\ProductService;
+use src\forms\Store\Product\{PhotosForm, ProductForm};
+use src\services\Store\ProductService;
 use Yii;
-use application\models\Store\Product;
+use src\models\Store\Product;
 use backend\forms\Store\ProductSearch;
 use yii\base\Module;
 use yii\web\Controller;

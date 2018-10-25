@@ -3,7 +3,7 @@ namespace backend\forms;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use application\models\User;
+use src\models\User;
 
 /**
  * Class UserSearch

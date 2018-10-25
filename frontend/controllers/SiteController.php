@@ -1,12 +1,12 @@
 <?php
-namespace frontend\controllers;
+namespace src\controllers;
 
 use Yii;
 use yii\base\Module;
 use yii\web\{BadRequestHttpException, Controller};
 use yii\filters\{VerbFilter, AccessControl};
-use application\services\{FeedbackService, PasswordResetService, SignupService, AuthService};
-use application\forms\{PasswordResetRequestForm, ResetPasswordForm, SignupForm, ContactForm, LoginForm};
+use src\services\{FeedbackService, PasswordResetService, SignupService, AuthService};
+use src\forms\{PasswordResetRequestForm, ResetPasswordForm, SignupForm, ContactForm, LoginForm};
 
 /**
  * Class SiteController

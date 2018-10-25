@@ -1,9 +1,9 @@
 <?php
 namespace frontend\controllers\blog;
 
-use application\forms\Blog\CommentForm;
-use application\models\Blog\{Category, Post, Tag};
-use application\services\Blog\CommentService;
+use src\forms\Blog\CommentForm;
+use src\models\Blog\{Category, Post, Tag};
+use src\services\Blog\CommentService;
 use Yii;
 use yii\base\Module;
 use yii\web\Controller;

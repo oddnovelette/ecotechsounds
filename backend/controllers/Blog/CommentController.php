@@ -1,12 +1,11 @@
 <?php
 namespace backend\controllers\blog;
-use application\forms\Blog\CommentEditForm;
-use application\models\Blog\Post;
-use application\services\Blog\CommentService;
+
+use src\forms\Blog\CommentEditForm;
+use src\models\Blog\Post;
+use src\services\Blog\CommentService;
 use backend\forms\Blog\CommentSearch;
-
 use Yii;
-
 use yii\base\Module;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

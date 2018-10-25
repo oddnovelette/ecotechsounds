@@ -1,7 +1,7 @@
 <?php
 namespace backend\forms\Blog;
 
-use application\models\Blog\Tag;
+use src\models\Blog\Tag;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 

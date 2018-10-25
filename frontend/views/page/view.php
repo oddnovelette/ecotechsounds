@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $page \application\models\Page */
+/* @var $page \src\models\Page */
 
 $this->title = $page->getSeoTitle();
 $this->registerMetaTag(['name' => 'description', 'content' => $page->meta->description]);

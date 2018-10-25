@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'model' => $comment,
                 'attributes' => [
                     'id',
-                    'created_at:boolean',
+                    'created_at:relativeTime',
                     'active:boolean',
                     'user_id',
                     'parent_id',

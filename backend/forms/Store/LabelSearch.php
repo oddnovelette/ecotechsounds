@@ -3,7 +3,7 @@ namespace backend\forms\Store;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use application\models\Store\Label;
+use src\models\Store\Label;
 
 class LabelSearch extends Model
 {

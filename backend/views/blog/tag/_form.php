@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model application\forms\Blog\TagForm */
+/* @var $model src\forms\Blog\TagForm */
 /* @var $form yii\widgets\ActiveForm */
 
 ?>

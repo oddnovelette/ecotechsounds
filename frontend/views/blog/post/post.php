@@ -1,9 +1,10 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $post application\models\Blog\Post */
+/* @var $post src\models\Blog\Post */
 
 use frontend\widgets\Blog\BlogCommentsWidget;
+use src\models\User;
 use yii\helpers\Html;
 
 $this->title = $post->getSeoTitle();
@@ -40,11 +41,11 @@ foreach ($post->tags as $tag) {
     <div class="col-md-6">
         <div class="col-md-6">
 
-                <a href="#" data-id="<?= $post->id ?>" class="btn btn-sm button-unlike <?=(\application\models\User::findIdentity(Yii::$app->user->id) and !\application\models\User::findIdentity(Yii::$app->user->id)->postAlreadyLiked($post->id)) ? "" : "hidden";?>">
+                <a href="#" data-id="<?= $post->id ?>" class="btn btn-sm button-unlike <?=(User::findIdentity(Yii::$app->user->id) and !User::findIdentity(Yii::$app->user->id)->postAlreadyLiked($post->id)) ? "" : "hidden";?>">
                 <span class="glyphicon glyphicon-heart"></span>
                 </a>
 
-                <a href="#" data-id="<?= $post->id ?>" class="btn btn-sm button-like <?=(\application\models\User::findIdentity(Yii::$app->user->id) and !\application\models\User::findIdentity(Yii::$app->user->id)->postAlreadyLiked($post->id)) ? "hidden" : "";?>">
+                <a href="#" data-id="<?= $post->id ?>" class="btn btn-sm button-like <?=(User::findIdentity(Yii::$app->user->id) and !User::findIdentity(Yii::$app->user->id)->postAlreadyLiked($post->id)) ? "hidden" : "";?>">
                 <span class="button-like glyphicon glyphicon-heart-empty"></span>
                 </a>
             <span class="likes"><?=$post->likes_counter ?></span>

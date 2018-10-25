@@ -1,7 +1,7 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $model application\forms\Store\LabelForm */
+/* @var $model src\forms\Store\LabelForm */
 
 $this->title = 'Create Label';
 $this->params['breadcrumbs'][] = ['label' => 'Labels', 'url' => ['index']];

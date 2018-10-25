@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-use application\models\Blog\Post;
+use src\models\Blog\Post;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;

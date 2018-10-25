@@ -1,10 +1,10 @@
 <?php
 namespace backend\controllers\store;
 
-use application\forms\Store\TagForm;
-use application\services\Store\TagService;
+use src\forms\Store\TagForm;
+use src\services\Store\TagService;
 use Yii;
-use application\models\Store\Tag;
+use src\models\Store\Tag;
 use backend\forms\Store\TagSearch;
 use yii\base\Module;
 use yii\web\Controller;

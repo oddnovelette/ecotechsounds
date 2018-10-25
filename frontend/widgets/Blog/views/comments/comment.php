@@ -4,10 +4,10 @@ use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $post \application\models\Blog\Post */
+/* @var $post \src\models\Blog\Post */
 /* @var $items \frontend\widgets\Blog\CommentView[] */
 /* @var $count integer */
-/* @var $commentForm \application\forms\Blog\CommentForm */
+/* @var $commentForm \src\forms\Blog\CommentForm */
 ?>
     <div id="comments" class="inner-bottom-xs">
         <h2>Comments</h2>

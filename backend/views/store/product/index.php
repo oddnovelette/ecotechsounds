@@ -1,6 +1,6 @@
 <?php
 
-use application\models\Store\Product;
+use src\models\Store\Product;
 use yii\helpers\Html;
 use yii\grid\GridView;
 

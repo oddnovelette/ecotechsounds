@@ -3,7 +3,7 @@ namespace backend\forms\Store;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use application\models\Store\Category;
+use src\models\Store\Category;
 
 class CategorySearch extends Model
 {

@@ -1,10 +1,10 @@
 <?php
 namespace backend\controllers\store;
 
-use application\forms\Store\LabelForm;
-use application\services\Store\LabelService;
+use src\forms\Store\LabelForm;
+use src\services\Store\LabelService;
 use Yii;
-use application\models\Store\Label;
+use src\models\Store\Label;
 use backend\forms\Store\LabelSearch;
 use yii\base\Module;
 use yii\web\Controller;

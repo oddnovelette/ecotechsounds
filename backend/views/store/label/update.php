@@ -1,8 +1,8 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $label application\models\Store\Label */
-/* @var $model application\forms\Store\LabelForm */
+/* @var $label src\models\Store\Label */
+/* @var $model src\forms\Store\LabelForm */
 
 $this->title = 'Update Label: ' . $label->name;
 $this->params['breadcrumbs'][] = ['label' => 'Labels', 'url' => ['index']];

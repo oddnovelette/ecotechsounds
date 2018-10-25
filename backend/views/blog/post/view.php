@@ -1,13 +1,12 @@
 <?php
 
-use application\helpers\PostHelper;
+use src\helpers\PostHelper;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $post application\models\Blog\Post */
-/* @var $modificationsProvider yii\data\ActiveDataProvider */
+/* @var $post src\models\Blog\Post */
 
 $this->title = $post->title;
 $this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];

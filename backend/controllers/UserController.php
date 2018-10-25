@@ -1,11 +1,10 @@
 <?php
 namespace backend\controllers;
 
-use application\forms\User\UserCreateForm;
-use application\forms\User\UserEditForm;
-use application\services\UserService;
+use src\forms\User\{UserCreateForm, UserEditForm};
+use src\services\UserService;
 use Yii;
-use application\models\User;
+use src\models\User;
 use backend\forms\UserSearch;
 use yii\base\Module;
 use yii\web\Controller;

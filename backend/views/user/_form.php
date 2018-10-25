@@ -2,10 +2,12 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+
 /* @var $this yii\web\View */
-/* @var $model application\models\User */
+/* @var $model src\models\User */
 /* @var $form yii\widgets\ActiveForm */
 ?>
+
 <div class="user-form">
     <?php $form = ActiveForm::begin(); ?>
     <?= $form->field($model, 'status')->textInput() ?>

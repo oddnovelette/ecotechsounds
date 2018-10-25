@@ -1,9 +1,10 @@
 <?php
+
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $tag application\models\Store\Tag */
+/* @var $tag src\models\Store\Tag */
 
 $this->title = $tag->name;
 $this->params['breadcrumbs'][] = ['label' => 'Tags', 'url' => ['index']];

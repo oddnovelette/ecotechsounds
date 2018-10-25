@@ -5,7 +5,7 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model application\forms\Store\Product\ProductForm */
+/* @var $model src\forms\Store\Product\ProductForm */
 
 $this->title = 'Create A Product';
 $this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];

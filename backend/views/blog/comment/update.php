@@ -4,8 +4,8 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $post application\models\Blog\Post */
-/* @var $model application\forms\Blog\CommentForm */
+/* @var $post src\models\Blog\Post */
+/* @var $model src\forms\Blog\CommentForm */
 
 $this->title = 'Update Post: ' . $post->title;
 $this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];

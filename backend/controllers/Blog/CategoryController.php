@@ -1,9 +1,9 @@
 <?php
 namespace backend\controllers\blog;
 
-use application\forms\Blog\CategoryForm;
-use application\models\Blog\Category;
-use application\services\blog\CategoryService;
+use src\forms\Blog\CategoryForm;
+use src\models\Blog\Category;
+use src\services\blog\CategoryService;
 use Yii;
 use backend\forms\Blog\CategorySearch;
 use yii\base\Module;

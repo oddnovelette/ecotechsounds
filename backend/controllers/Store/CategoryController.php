@@ -1,10 +1,10 @@
 <?php
 namespace backend\controllers\store;
 
-use application\forms\Store\CategoryForm;
-use application\services\store\CategoryService;
+use src\forms\Store\CategoryForm;
+use src\services\store\CategoryService;
 use Yii;
-use application\models\Store\Category;
+use src\models\Store\Category;
 use backend\forms\Store\CategorySearch;
 use yii\base\Module;
 use yii\web\Controller;

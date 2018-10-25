@@ -3,7 +3,7 @@ namespace backend\forms;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use application\models\Page;
+use src\models\Page;
 
 /**
  * Class PageSearch

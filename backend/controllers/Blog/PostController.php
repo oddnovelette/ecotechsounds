@@ -1,9 +1,9 @@
 <?php
 namespace backend\controllers\blog;
 
-use application\forms\Blog\PostForm;
-use application\models\Blog\Post;
-use application\services\Blog\BlogService;
+use src\forms\Blog\PostForm;
+use src\models\Blog\Post;
+use src\services\Blog\BlogService;
 
 use Yii;
 use backend\forms\Blog\PostSearch;

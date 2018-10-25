@@ -1,7 +1,7 @@
 <?php
 namespace common\bootstrap;
 
-use application\services\FeedbackService;
+use src\services\FeedbackService;
 use yii\base\BootstrapInterface;
 use yii\mail\MailerInterface;
 

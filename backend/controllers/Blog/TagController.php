@@ -1,9 +1,9 @@
 <?php
 namespace backend\controllers\blog;
 
-use application\forms\Blog\TagForm;
-use application\models\Blog\Tag;
-use application\services\blog\TagService;
+use src\forms\Blog\TagForm;
+use src\models\Blog\Tag;
+use src\services\blog\TagService;
 use Yii;
 use backend\forms\Blog\TagSearch;
 use yii\base\Module;

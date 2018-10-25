@@ -1,7 +1,7 @@
 <?php
 namespace frontend\widgets\Blog;
 
-use application\models\Blog\Comment;
+use src\models\Blog\Comment;
 
 class CommentView
 {

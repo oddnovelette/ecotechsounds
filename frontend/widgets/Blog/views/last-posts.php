@@ -1,6 +1,7 @@
 <?php
 
-/** @var $posts application\models\Blog\Post[] */
+/** @var $posts src\models\Blog\Post[] */
+
 use yii\helpers\Html;
 use yii\helpers\StringHelper;
 use yii\helpers\Url;

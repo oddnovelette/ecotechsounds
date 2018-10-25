@@ -1,8 +1,8 @@
 <?php
 namespace backend\forms\Blog;
 
-use application\helpers\PostHelper;
-use application\models\Blog\{Category, Post};
+use src\helpers\PostHelper;
+use src\models\Blog\{Category, Post};
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;

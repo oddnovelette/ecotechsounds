@@ -1,9 +1,10 @@
 <?php
+
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model application\forms\Store\CategoryForm */
+/* @var $model src\forms\Store\CategoryForm */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

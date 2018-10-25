@@ -1,7 +1,7 @@
 <?php
 namespace frontend\widgets\Blog;
 
-use application\models\Blog\Post;
+use src\models\Blog\Post;
 use yii\base\Widget;
 
 class LastPostsWidget extends Widget

@@ -1,10 +1,14 @@
 <?php
 namespace frontend\widgets\Blog;
 
-use application\models\Blog\Category;
+use src\models\Blog\Category;
 use yii\base\Widget;
 use yii\helpers\Html;
 
+/**
+ * Class BlogCategoriesWidget
+ * @package frontend\widgets\Blog
+ */
 class BlogCategoriesWidget extends Widget
 {
     /** @var Category|null */

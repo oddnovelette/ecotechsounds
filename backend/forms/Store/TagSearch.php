@@ -3,7 +3,7 @@ namespace backend\forms\Store;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use application\models\Store\Tag;
+use src\models\Store\Tag;
 
 /**
  * Class TagSearch

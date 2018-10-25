@@ -1,6 +1,6 @@
 <?php
 
-use application\models\Blog\Comment;
+use src\models\Blog\Comment;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\StringHelper;
@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filterModel' => $searchModel,
                 'columns' => [
                     'id',
-                    'created_at:datetime',
+                    'created_at:relativeTime',
                     [
                         'attribute' => 'text',
                         'value' => function (Comment $model) {

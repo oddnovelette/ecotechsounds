@@ -1,8 +1,8 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $page application\models\Page */
-/* @var $model application\forms\PageForm */
+/* @var $page src\models\Page */
+/* @var $model src\forms\PageForm */
 
 $this->title = 'Update Page: ' . $page->title;
 $this->params['breadcrumbs'][] = ['label' => 'Pages', 'url' => ['index']];

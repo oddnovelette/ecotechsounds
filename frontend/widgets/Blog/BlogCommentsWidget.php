@@ -1,9 +1,9 @@
 <?php
 namespace frontend\widgets\Blog;
 
-use application\forms\Blog\CommentForm;
-use application\models\Blog\Comment;
-use application\models\Blog\Post;
+use src\forms\Blog\CommentForm;
+use src\models\Blog\Comment;
+use src\models\Blog\Post;
 use yii\base\InvalidConfigException;
 use yii\base\Widget;
 

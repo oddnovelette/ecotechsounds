@@ -4,8 +4,8 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $product application\models\Store\Product */
-/* @var $model application\forms\Store\Product\ProductForm */
+/* @var $product src\models\Store\Product */
+/* @var $model src\forms\Store\Product\ProductForm */
 
 $this->title = 'Update Product: ' . $product->name;
 $this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];

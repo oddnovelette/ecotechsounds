@@ -1,9 +1,9 @@
 <?php
 namespace backend\controllers;
 
-use application\forms\PageForm;
-use application\models\Page;
-use application\services\PageService;
+use src\forms\PageForm;
+use src\models\Page;
+use src\services\PageService;
 use backend\forms\PageSearch;
 use Yii;
 use yii\base\Module;

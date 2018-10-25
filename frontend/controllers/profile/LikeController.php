@@ -1,8 +1,8 @@
 <?php
 namespace frontend\controllers\profile;
 
-use application\models\Blog\Post;
-use application\services\blog\PostLikeService;
+use src\models\Blog\Post;
+use src\services\blog\PostLikeService;
 use Yii;
 use yii\base\Module;
 use yii\filters\VerbFilter;

@@ -7,8 +7,8 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $product application\models\Store\Product */
-/* @var $photosForm application\forms\Store\Product\PhotosForm */
+/* @var $product src\models\Store\Product */
+/* @var $photosForm src\forms\Store\Product\PhotosForm */
 
 $this->title = $product->name;
 $this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];

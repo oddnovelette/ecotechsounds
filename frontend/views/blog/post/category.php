@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\DataProviderInterface */
-/* @var $category application\models\Blog\Category */
+/* @var $category src\models\Blog\Category */
 
 use yii\helpers\Html;
 $this->title = $category->getSeoTitle();

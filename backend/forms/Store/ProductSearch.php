@@ -1,11 +1,11 @@
 <?php
 namespace backend\forms\Store;
 
-use application\models\Store\Category;
-use application\models\Store\Label;
+use src\models\Store\Category;
+use src\models\Store\Label;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use application\models\Store\Product;
+use src\models\Store\Product;
 use yii\helpers\ArrayHelper;
 
 class ProductSearch extends Model
