@@ -1,8 +1,7 @@
 <?php
 namespace src\models;
 
-use src\models\Blog\Post;
-use src\models\Blog\PostLike;
+use src\models\Blog\{Post, PostLike};
 use src\queryModels\UserQuery;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use Yii;
@@ -11,6 +10,8 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use yii\web\UploadedFile;
+use yiidreamteam\upload\ImageUploadBehavior;
 
 /**
  * User model
@@ -23,11 +24,25 @@ use yii\web\IdentityInterface;
  * @property string $email
  * @property string $email_confirm_token
  * @property string $auth_key
+ * @property integer $privileged
+ * @property integer $type
+ * @property integer $account_privacy
+ * @property integer $email_privacy
+ * @property string $custom_username
+ * @property string $real_name
+ * @property string $real_surname
+ * @property string $description
+ * @property string $avatar
+ * @property string $profile_image
+ * @property string $soundcloud_link
+ * @property string $discogs_link
+ * @property string $bandcamp_link
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
  * @property PostLike[] $postLikes
+ * @mixin ImageUploadBehavior
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -73,15 +88,24 @@ class User extends ActiveRecord implements IdentityInterface
         return $user;
     }
 
-    /**
-     * @param string $username
-     * @param string $email
-     * @return void
-     */
-    public function edit(string $username, string $email) : void
+    public function edit(
+        $username,
+        $email,
+        $description,
+        $custom_username,
+        $real_name,
+        $real_surname,
+        $soundcloud_link, $discogs_link, $bandcamp_link) : void
     {
         $this->username = $username;
         $this->email = $email;
+        $this->description = $description;
+        $this->custom_username = $custom_username;
+        $this->real_name = $real_name;
+        $this->real_surname = $real_surname;
+        $this->soundcloud_link = $soundcloud_link;
+        $this->discogs_link = $discogs_link;
+        $this->bandcamp_link = $bandcamp_link;
         $this->updated_at = time();
     }
 
@@ -102,12 +126,30 @@ class User extends ActiveRecord implements IdentityInterface
         return '{{%users}}';
     }
 
+    public function setAvatar(UploadedFile $avatar) : void
+    {
+        $this->avatar = $avatar;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function behaviors() : array
     {
         return [
+            [
+                'class' => ImageUploadBehavior::class,
+                'attribute' => 'avatar',
+                'createThumbsOnRequest' => true,
+                'filePath' => '@uploadsRoot/origin/avatars/[[id]].[[extension]]',
+                'fileUrl' => '@uploads/origin/avatars/[[id]].[[extension]]',
+                'thumbPath' => '@uploadsRoot/cache/avatars/[[profile]]_[[id]].[[extension]]',
+                'thumbUrl' => '@uploads/cache/avatars/[[profile]]_[[id]].[[extension]]',
+                'thumbs' => [
+                    'thumb' => ['width' => 60, 'height' => 60],
+                    'list' => ['width' => 100, 'height' => 100],
+                ],
+            ],
             TimestampBehavior::class,
             [
                 'class' => SaveRelationsBehavior::class,

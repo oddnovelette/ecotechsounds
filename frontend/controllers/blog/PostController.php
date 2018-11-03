@@ -99,6 +99,7 @@ class PostController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $comment = $this->commentService->create($post->id, Yii::$app->user->id, $form);
+                Yii::$app->session->setFlash('success', 'Replied');
                 return $this->redirect(['post', 'slug' => $post->slug, '#' => 'comment_' . $comment->id]);
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);

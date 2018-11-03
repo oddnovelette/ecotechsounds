@@ -19,12 +19,6 @@ return [
         'blog/<id:\d+>/comment' => 'blog/post/comment',
         'magazine/category/<slug:[\w\-]+>' => 'blog/post/category',
 
-        'profile' => 'profile/default/index',
-        'profile/<_c:[\w\-]+>' => 'profile/<_c>/index',
-        'profile/<_c:[\w\-]+>/<id:\d+>' => 'profile/<_c>/view',
-        'profile/<_c:[\w\-]+>/<_a:[\w-]+>' => 'profile/<_c>/<_a>',
-        'profile/<_c:[\w\-]+>/<id:\d+>/<_a:[\w\-]+>' => 'profile/<_c>/<_a>',
-
         '<_c:[\w\-]+>' => '<_c>/index',
         '<_c:[\w\-]+>/<id:\d+>' => '<_c>/view',
         '<_c:[\w\-]+>/<_a:[\w-]+>' => '<_c>/<_a>',

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "204afb2ca6a3194f76f7bd6417b3b40e",
+    "content-hash": "c6c1ae020c3ce99309f44dda4d6c5ce8",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -73,6 +73,66 @@
             ]
         },
         {
+            "name": "bower-asset/desandro-matches-selector",
+            "version": "v2.0.2",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:desandro/matches-selector.git",
+                "reference": "42ee1cbab7469454d140bdab04d2ceed9c68b85e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/desandro/matches-selector/zipball/42ee1cbab7469454d140bdab04d2ceed9c68b85e",
+                "reference": "42ee1cbab7469454d140bdab04d2ceed9c68b85e",
+                "shasum": null
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "bower-asset/ev-emitter",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/metafizzy/ev-emitter.git",
+                "reference": "1baa3a03d8e07f665b0eb797661fcc2b0d2a5736"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/metafizzy/ev-emitter/zipball/1baa3a03d8e07f665b0eb797661fcc2b0d2a5736",
+                "reference": "1baa3a03d8e07f665b0eb797661fcc2b0d2a5736",
+                "shasum": null
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "bower-asset/fizzy-ui-utils",
+            "version": "v2.0.7",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:metafizzy/fizzy-ui-utils.git",
+                "reference": "72feb9fc3d6de25696291941121bb3ec2db8221e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/metafizzy/fizzy-ui-utils/zipball/72feb9fc3d6de25696291941121bb3ec2db8221e",
+                "reference": "72feb9fc3d6de25696291941121bb3ec2db8221e",
+                "shasum": null
+            },
+            "require": {
+                "bower-asset/desandro-matches-selector": ">=2.0.0,<3.0.0"
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
             "name": "bower-asset/font-awesome",
             "version": "v4.7.0",
             "source": {
@@ -91,6 +151,25 @@
                 "OFL-1.1",
                 "MIT",
                 "CC-BY-3.0"
+            ]
+        },
+        {
+            "name": "bower-asset/get-size",
+            "version": "v2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/desandro/get-size.git",
+                "reference": "6879e7f15b4b6e19ca392b6955edfa8d4aa6f787"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/desandro/get-size/zipball/6879e7f15b4b6e19ca392b6955edfa8d4aa6f787",
+                "reference": "6879e7f15b4b6e19ca392b6955edfa8d4aa6f787",
+                "shasum": null
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
             ]
         },
         {
@@ -150,6 +229,53 @@
             },
             "require": {
                 "bower-asset/jquery": ">=1.6"
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "bower-asset/masonry",
+            "version": "v4.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/desandro/masonry.git",
+                "reference": "3b0883cf4a4a046896719b9cf282ea74be7ffecd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/desandro/masonry/zipball/3b0883cf4a4a046896719b9cf282ea74be7ffecd",
+                "reference": "3b0883cf4a4a046896719b9cf282ea74be7ffecd",
+                "shasum": null
+            },
+            "require": {
+                "bower-asset/get-size": ">=2.0.2,<3.0.0",
+                "bower-asset/outlayer": ">=2.1.0,<3.0.0"
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "bower-asset/outlayer",
+            "version": "v2.1.1",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:metafizzy/outlayer.git",
+                "reference": "bf31c5748bf84fcc2c553d1199a6ecaf0ebd9878"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/metafizzy/outlayer/zipball/bf31c5748bf84fcc2c553d1199a6ecaf0ebd9878",
+                "reference": "bf31c5748bf84fcc2c553d1199a6ecaf0ebd9878",
+                "shasum": null
+            },
+            "require": {
+                "bower-asset/ev-emitter": ">=1.0.0,<2.0.0",
+                "bower-asset/fizzy-ui-utils": ">=2.0.0,<3.0.0",
+                "bower-asset/get-size": ">=2.0.2,<3.0.0"
             },
             "type": "bower-asset",
             "license": [
@@ -2202,6 +2328,50 @@
                 "rotate"
             ],
             "time": "2015-09-08T22:55:44+00:00"
+        },
+        {
+            "name": "philippfrenzel/yii2masonry",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/philippfrenzel/yii2masonry.git",
+                "reference": "cedc03e4fa622f77a98c9a29dbc2491cc2f2f66c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/philippfrenzel/yii2masonry/zipball/cedc03e4fa622f77a98c9a29dbc2491cc2f2f66c",
+                "reference": "cedc03e4fa622f77a98c9a29dbc2491cc2f2f66c",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/masonry": "*",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "yii2masonry\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT License"
+            ],
+            "authors": [
+                {
+                    "name": "Philipp Frenzel",
+                    "email": "philipp@frenzel.net",
+                    "homepage": "http://www.frenzel.net/",
+                    "role": "Author Extension for yii2"
+                }
+            ],
+            "description": "Yii2 Masonry Integration for Yii2",
+            "homepage": "http://www.frenzel.net/",
+            "keywords": [
+                "masonry",
+                "yii2"
+            ],
+            "time": "2015-01-21T21:51:24+00:00"
         },
         {
             "name": "rmrevin/yii2-fontawesome",

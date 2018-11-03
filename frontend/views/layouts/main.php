@@ -32,7 +32,7 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
-
+        <div id="page-preloader"><span class="spinner"></span></div>
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                 <span class="icon-bar"></span>
@@ -43,24 +43,34 @@ AppAsset::register($this);
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="<?= Html::encode(Yii::$app->homeUrl) ?>">Home</a></li>
                 <li><a href="<?= Html::encode(Url::to('/magazine')) ?>">Magazine</a></li>
-                <li><a href="#band">Residents</a></li>
+                <li><a href="<?= Html::encode(Url::to('/users/index')) ?>">Users</a></li>
                 <li><a href="#band">Works</a></li>
-                <li><a href="#tour">Store</a></li>
 
                <?php if (Yii::$app->user->isGuest): ?>
                    <li><a href="<?= Html::encode(Url::to('/site/signup')) ?>">Join</a></li>
+                   <li role="separator" class="divider"></li>
                    <li><a href="<?= Html::encode(Url::to('/site/login')) ?>">Login</a></li>
                <?php else: ?>
 
+
+
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><?= Yii::$app->user->identity->username ?>
+
+                    <a class="dropdown-toggle nav-pic" data-toggle="dropdown" href="#">
+                        <?php if (Yii::$app->user->identity->avatar): ?>
+                            <?= Html::img(Yii::$app->user->identity->getThumbFileUrl('avatar', 'thumb'), ['class' => 'img-circle avatar-pill']) ?>
+                        <?php endif; ?>
+
+                        &nbsp;&nbsp;<?= Yii::$app->user->identity->username ?>
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="<?= Html::encode(Url::to('/profile/default')) ?>">Profile</a></li>
-                        <li><a href="<?= Html::encode(Url::to('/profile/like/index')) ?>">Collection</a></li>
-                        <li><a href="<?= Html::encode(Url::to('/site/logout')) ?>">Sign out</a></li>
+                        <li><a href="<?= Html::encode(Url::to('/profile/user/view')) ?>"><span class="gl-profile glyphicon glyphicon-user"></span> <?= Yii::$app->user->identity->username ?>`s Profile</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="<?= Html::encode(Url::to('/profile/like/index')) ?>"><i class="gl-profile fa fa-heart"></i> Collection</a></li>
+                        <li><a href="<?= Html::encode(Url::to('/profile/user/update')) ?>"><i class="gl-profile fa fa-cogs"></i> Profile Settings</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="<?= Html::encode(Url::to('/site/logout')) ?>"><i class="gl-profile fa fa-power-off"></i> Sign out</a></li>
                     </ul>
                 </li>
 
@@ -96,9 +106,8 @@ AppAsset::register($this);
         <a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TO TOP">
             <span class="glyphicon glyphicon-chevron-up"></span>
         </a><br><br>
-        <p>Copyright &copy;
-            <a href="<?= Html::encode(Yii::$app->homeUrl) ?>" data-toggle="tooltip" title="<?=  Html::encode(Yii::$app->name) ?>">
-                <?= date('Y') ?>.
+        <p>Copyright &copy; <?= date('Y') ?>
+            <a href="<?= Html::encode(Yii::$app->homeUrl) ?>" title="<?=  Html::encode(Yii::$app->name) ?>">.
                     <?=  Html::encode(Yii::$app->name) ?>
             </a>
         </p>
@@ -106,36 +115,6 @@ AppAsset::register($this);
     </footer>
 
 <?php $this->endBody() ?>
-<script>
-    $(document).ready(function(){
-        // Initialize Tooltip
-        $('[data-toggle="tooltip"]').tooltip();
-
-        // Add smooth scrolling to all links in navbar + footer link
-        $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
-
-            // Make sure this.hash has a value before overriding default behavior
-            if (this.hash !== "") {
-
-                // Prevent default anchor click behavior
-                event.preventDefault();
-
-                // Store hash
-                var hash = this.hash;
-
-                // Using jQuery's animate() method to add smooth page scroll
-                // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
-                $('html, body').animate({
-                    scrollTop: $(hash).offset().top
-                }, 900, function(){
-
-                    // Add hash (#) to URL when done scrolling (default click behavior)
-                    window.location.hash = hash;
-                });
-            } // End if
-        });
-    })
-</script>
 
 </body>
 </html>

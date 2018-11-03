@@ -113,7 +113,7 @@ class UserController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->userService->edit($user->id, $form);
-                Yii::$app->session->setFlash('success', 'User updated successfully');
+                Yii::$app->session->setFlash('success', 'Success');
                 return $this->redirect(['view', 'id' => $user->id]);
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);

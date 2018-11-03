@@ -10,7 +10,7 @@ use yii\helpers\Html;
 /* @var $commentForm \src\forms\Blog\CommentForm */
 ?>
     <div id="comments" class="inner-bottom-xs">
-        <h2>Comments</h2>
+        <h2><i class="fa fa-bullhorn"></i> Comments <span class="badge badge-pill pill-primary"> <?=$post->comments_counter?> </span></h2><hr>
         <?php foreach ($items as $item): ?>
             <?= $this->render('_comment', ['item' => $item]) ?>
         <?php endforeach; ?>
@@ -20,7 +20,7 @@ use yii\helpers\Html;
             'action' => ['comment', 'id' => $post->id],
         ]); ?>
         <?= Html::activeHiddenInput($commentForm, 'parentId') ?>
-        <?= $form->field($commentForm, 'text')->textarea(['rows' => 5]) ?>
+        <?= $form->field($commentForm, 'text')->textarea(['rows' => 5])->label('feel free to reply') ?>
         <div class="form-group">
             <?= Html::submitButton('Send comment', ['class' => 'btn btn-primary']) ?>
         </div>

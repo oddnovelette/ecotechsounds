@@ -48,14 +48,20 @@ foreach ($post->tags as $tag) {
                 <a href="#" data-id="<?= $post->id ?>" class="btn btn-sm button-like <?=(User::findIdentity(Yii::$app->user->id) and !User::findIdentity(Yii::$app->user->id)->postAlreadyLiked($post->id)) ? "hidden" : "";?>">
                 <span class="button-like glyphicon glyphicon-heart-empty"></span>
                 </a>
-            <span class="likes"><?=$post->likes_counter ?></span>
+            <span class="likes"><?= $post->likes_counter ?></span>
         </div>
     </div>
 
     <div class="col-md-6">
 
 
-    <div class="author">By <?= Html::encode($post->user->username) ?></div>
+    <div class="well">
+        &nbsp;&nbsp;By <a href="#"> <?= Html::encode($post->user->username) ?></a>, <?= Yii::$app->formatter->format($post->created_at, 'relativeTime'); ?>
+        <?php if ($post->user->avatar): ?>
+            <?= Html::img($post->user->getThumbFileUrl('avatar', 'thumb'), ['class' => 'img-circle img-card']) ?>
+        <?php endif; ?><br>
+        &nbsp;&nbsp;<?= Html::encode($post->user->description) ?>
+        </div>
     </div>
 
 </div>

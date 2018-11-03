@@ -1,6 +1,7 @@
 <?php
 namespace src\models\Blog;
 
+use src\models\User;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
@@ -65,6 +66,21 @@ class Comment extends ActiveRecord
     public function getPost() : ActiveQuery
     {
         return $this->hasOne(Post::class, ['id' => 'post_id']);
+    }
+
+    public function isAuthor() : bool
+    {
+        $author_id = Post::findOne([$this->user_id, 'user_id'])->user_id;
+        if ($this->user_id === $author_id) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getUser() : ?User
+    {
+        return User::findOne([$this->user_id, 'id']);
     }
 
     public static function tableName() : string

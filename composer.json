@@ -27,7 +27,8 @@
         "bower-asset/font-awesome": " 4.7",
         "yiisoft/yii2-jui": "^2.0",
         "lavrentiev/yii2-toastr": "^2.0",
-        "ijackua/yii2-sharelinks-widget": "^1.0"
+        "ijackua/yii2-sharelinks-widget": "^1.0",
+        "philippfrenzel/yii2masonry": "^1.1"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
@@ -46,6 +47,13 @@
         {
             "type": "composer",
             "url": "https://asset-packagist.org"
+        }
+    ],
+    "asset-repositories": [
+        {
+            "name": "bower-asset/eventemitter",
+            "type": "bower-vcs",
+            "url": "git://github.com/Wolfy87/EventEmitter.git"
         }
     ]
 }

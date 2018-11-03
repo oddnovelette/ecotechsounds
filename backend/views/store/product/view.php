@@ -113,7 +113,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>
                         <div>
                             <?= Html::a(
-                                //Html::img('http://uploads.ecotechsounds.local/uploads/img.jpg', ['alt'=>Yii::$app->name]),
                                 Html::img($photo->getThumbFileUrl('file', 'thumb')),
                                 $photo->getUploadedFileUrl('file'),
                                 ['class' => 'thumbnail', 'target' => '_blank']

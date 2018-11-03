@@ -10,20 +10,33 @@ use yii\helpers\StringHelper;
 ?>
 <div class="last-user-posts">
     <?php if (count($posts)): ?>
-        <p>
-            <?= Html::a('See All Posts', ['/user-posts/index', 'user_id' => $user->id]) ?>
-        </p>
         <?php foreach ($posts as $post): ?>
             <div class="panel panel-default">
+
                 <div class="panel-heading">
-                    <?= Html::a(Html::encode($post->title), ['/user-posts/view', 'user_id' => $post->user_id, 'id' => $post->id]) ?>
+                    <h1><?= Html::a(Html::encode($post->title), ['/blog/post/post', 'slug' => $post->slug]) ?></h1>
                 </div>
                 <div class="panel-body">
-                    <?= Yii::$app->formatter->asNtext(StringHelper::truncateWords($post->content, 50)) ?>
+                    <?php if ($post->photo): ?>
+                        <div class="lefter-thumb">
+                            <img src="<?= Html::encode($post->getThumbFileUrl('photo', 'widget_list')) ?>" alt="" class="img-responsive img-rounded" />
+                        </div>
+                    <?php endif; ?>
+
+                    <p class="post-text-list"><?= Yii::$app->formatter->asNtext(StringHelper::truncateWords($post->content, 100)) ?></p>
+                </div>
+
+                <div class="panel-footer">
+                <span class="post-date-lite">
+        <span class="glyphicon glyphicon-eye-open"></span> <?= $post->views_counter ?>
+                        <span class="glyphicon glyphicon-comment"></span> <?= $post->comments_counter ?>
+                        <span class="glyphicon glyphicon-heart"></span> <?= $post->likes_counter ?>
+                </span>
+
                 </div>
             </div>
         <?php endforeach; ?>
     <?php else: ?>
-        <p>Nothing found.</p>
+        <p><strong><i>It is empty here by the moment..</i></strong></p>
     <?php endif; ?>
 </div>

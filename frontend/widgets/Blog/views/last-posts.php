@@ -10,7 +10,7 @@ use yii\helpers\Url;
 <div class="row">
     <?php foreach ($posts as $post): ?>
         <?php $url = Url::to(['/blog/post/post', 'id' => $post->id]); ?>
-        <div class="product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="post-layout col-lg-4 col-md-4 col-sm-6 col-xs-12">
 
                 <?php if ($post->photo): ?>
                     <div class="image">
@@ -21,11 +21,11 @@ use yii\helpers\Url;
                 <?php endif; ?>
                 <div>
                     <div class="caption">
-                        <p class="widget-posts"><a href="<?= Html::encode($url) ?>"><?= Html::encode($post->title) ?></a></p>
+                        <h3 class="widget-posts"><?= Html::encode($post->category->name) ?> <i class="fa fa-chain"></i> <a href="<?= Html::encode($url) ?>"><?= Html::encode($post->title) ?></a></h3>
 
                         <p><?= Html::encode(StringHelper::truncateWords(strip_tags($post->description), 25)) ?></p>
 
-                        <p class="post-date">&nbsp;&nbsp;
+                        <p class="post-date text-center">&nbsp;&nbsp;
                                 <span class="glyphicon glyphicon-eye-open"></span> <?= $post->views_counter ?>
                                 <span class="glyphicon glyphicon-comment"></span> <?= $post->comments_counter ?>
                                 <span class="glyphicon glyphicon-heart"></span> <?= $post->likes_counter ?>

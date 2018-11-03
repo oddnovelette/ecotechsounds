@@ -1,11 +1,19 @@
 <?php
 
 /* @var $this yii\web\View */
+
+use yii\widgets\ListView;
+
 /* @var $dataProvider yii\data\DataProviderInterface */
+
 ?>
 
-<?= \yii\widgets\ListView::widget([
+<?= ListView::widget([
     'dataProvider' => $dataProvider,
-    'layout' => "{items}\n{pager}",
+    'layout' => "<div class=\"js-masonry\">{items}</div>\n{pager}",
     'itemView' => '_post',
+    'itemOptions' => [
+        'class' => 'col-lg-4 col-md-6 col-xs-12',
+    ],
+
 ]) ?>

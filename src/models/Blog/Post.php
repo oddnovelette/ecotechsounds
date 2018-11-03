@@ -5,7 +5,6 @@ use src\behaviors\MetaTagsBehavior;
 use src\models\Meta;
 use src\models\User;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
-
 use yii\data\ActiveDataProvider;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -230,6 +229,11 @@ class Post extends ActiveRecord implements Linkable
         $this->tagAssignments = [];
     }
 
+    public function getUserModel($user_id) : ?User
+    {
+        return User::findOne($user_id);
+    }
+
     public function getCategory() : ActiveQuery
     {
         return $this->hasOne(Category::class, ['id' => 'category_id']);
@@ -396,7 +400,6 @@ class Post extends ActiveRecord implements Linkable
                     'blog_list' => ['width' => 1000, 'height' => 600],
                     'widget_list' => ['width' => 300, 'height' => 300],
                     'origin' => ['width' => 1000, 'height' => 600],
-                    //'origin' => ['processor' => [new WatermarkingService(1024, 768, '@frontend/web/image/logo.png'), 'process']],
                 ],
             ],
         ];

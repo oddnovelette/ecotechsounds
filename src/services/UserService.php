@@ -41,9 +41,21 @@ class UserService
             throw new \DomainException('User is not found.');
         }
 
-        $user->edit($form->username, $form->email);
+        $user->edit(
+            $form->username,
+            $form->email,
+            $form->description,
+            $form->custom_username,
+            $form->real_name,
+            $form->real_surname,
+            $form->soundcloud_link,
+            $form->discogs_link,
+            $form->bandcamp_link
+        );
+
+        if ($form->avatar) $user->setAvatar($form->avatar);
         if (!$user->save()) {
-            throw new \RuntimeException('User editing error occured.');
+            throw new \RuntimeException('Editing error occured.');
         }
     }
 }

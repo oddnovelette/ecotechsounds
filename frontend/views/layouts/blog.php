@@ -11,11 +11,11 @@ use frontend\widgets\Blog\BlogCategoriesWidget;
             'active' => $this->params['active_category'] ?? null
         ]) ?>
     </aside>
+
     <div class="row">
         <div id="content" class="col-sm-12">
             <?= $content ?>
         </div>
-
     </div>
 
 <?php $this->endContent() ?>

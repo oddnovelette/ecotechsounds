@@ -11,7 +11,10 @@ $this->title = 'Your likes collection';
 $this->params['breadcrumbs'][] = ['label' => 'Profile', 'url' => ['profile/default/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="profile-index"><br><br>
+<div class="profile-index">
+
+    <h2>All posts you`ve liked</h2><hr>
+
     <?= GridView::widget([
         'showHeader'=> false,
         'tableOptions' => ['class' => 'table table-striped'],

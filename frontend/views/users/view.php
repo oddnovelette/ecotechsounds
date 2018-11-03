@@ -11,20 +11,23 @@ $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <?= Yii::$app->formatter->asNtext($model->description) ?>
-        </div>
+    <div class="panel-heading">
+        <?php if ($model->avatar): ?>
+            <?= Html::img($model->getThumbFileUrl('avatar', 'list'), ['class' => 'img-circle img-card avatar-prof']) ?>
+        <?php else: ?>
+            <i class="fa fa-user-circle-o img-card"></i>
+        <?php endif; ?>
+        <p>
+            <a class="author"><?= Html::encode($model->username) ?></a><br>
+            <span class="author">Signed up <?= Yii::$app->formatter->asDate($model->created_at) ?></span><br>
+            <span class="author">Profile updated <?= Yii::$app->formatter->asRelativeTime($model->created_at) ?></span>
+        </p>
+    </div>
+    <div class="panel-body well">
+        <?= Yii::$app->formatter->asNtext($model->description) ?>
     </div>
 
-    <p class="pull-right">
-        <?= Html::a('Create Post', ['user-posts/create', 'user_id' => $model->id], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <h2>My Recent Posts</h2>
+    <h2>Recent Posts</h2><hr>
 
     <?= LastUserPosts::widget([
             'user' => $model,

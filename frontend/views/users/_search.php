@@ -15,11 +15,11 @@ use yii\widgets\ActiveForm;
             'method' => 'get',
         ]); ?>
 
-        <?= $form->field($model, 'username') ?>
+        <?= $form->field($model, 'username')->textInput(['placeholder' => 'Find users by user name..'])->label('Active users search') ?>
 
         <div>
-            <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-            <?= Html::a('Reset', [''], ['class' => 'btn btn-default']) ?>
+            <?= Html::submitButton('<i class="fa fa-search"></i> Search', ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('Clear', [''], ['class' => 'btn btn-default']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>
