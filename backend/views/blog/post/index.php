@@ -15,6 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="user-index">
     <p>
+        <?= Html::a('<i class="fa fa-chevron-left"></i> Back', Yii::$app->request->referrer, ['class' => 'btn btn-default']) ?>
         <?= Html::a('Create Post', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <div class="box">

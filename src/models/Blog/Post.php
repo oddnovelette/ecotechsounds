@@ -122,6 +122,11 @@ class Post extends ActiveRecord implements Linkable
         return true;
     }
 
+    public static function getAllViews() : ?int
+    {
+        return Post::find()->published()->count('[[id]]');
+    }
+
     public static function getLast($limit) : array
     {
         return Post::find()->published()->with('category')->orderBy(['id' => SORT_DESC])->limit($limit)->all();
@@ -227,11 +232,6 @@ class Post extends ActiveRecord implements Linkable
     public function revokeTags(): void
     {
         $this->tagAssignments = [];
-    }
-
-    public function getUserModel($user_id) : ?User
-    {
-        return User::findOne($user_id);
     }
 
     public function getCategory() : ActiveQuery

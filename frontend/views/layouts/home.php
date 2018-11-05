@@ -66,10 +66,10 @@ use frontend\widgets\Blog\LastPostsWidget;
 <!-- Container (TOUR Section) -->
 <div id="tour">
     <div class="container bg-1">
-        <h3 class="text-center">Latest from magazine</h3>
+        <h2 class="widget-heading">LATEST FROM MAGAZINE:</h2>
         <div class="row">
         <?= LastPostsWidget::widget([
-            'limit' => 3,
+            'limit' => 9,
         ]) ?>
         </div>
 
@@ -78,8 +78,7 @@ use frontend\widgets\Blog\LastPostsWidget;
 
 <!-- Container (Contact Section) -->
 <div id="contact" class="container">
-    <h3 class="text-center">Contact</h3>
-    <p class="text-center"><em>We love our fans!</em></p>
+    <h2 class="widget-heading">CONTACT US:</h2>
 
     <div class="row">
         <div class="col-md-4">

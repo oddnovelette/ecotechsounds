@@ -65,10 +65,10 @@ AppAsset::register($this);
                         &nbsp;&nbsp;<?= Yii::$app->user->identity->username ?>
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="<?= Html::encode(Url::to('/profile/user/view')) ?>"><span class="gl-profile glyphicon glyphicon-user"></span> <?= Yii::$app->user->identity->username ?>`s Profile</a></li>
+                        <li><a href="<?= Html::encode(Url::to('/profile/user/view')) ?>"><span class="gl-profile glyphicon glyphicon-user"></span> Profile</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="<?= Html::encode(Url::to('/profile/like/index')) ?>"><i class="gl-profile fa fa-heart"></i> Collection</a></li>
-                        <li><a href="<?= Html::encode(Url::to('/profile/user/update')) ?>"><i class="gl-profile fa fa-cogs"></i> Profile Settings</a></li>
+                        <li><a href="<?= Html::encode(Url::to('/profile/user/update')) ?>"><i class="gl-profile fa fa-cogs"></i> Settings</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="<?= Html::encode(Url::to('/site/logout')) ?>"><i class="gl-profile fa fa-power-off"></i> Sign out</a></li>
                     </ul>

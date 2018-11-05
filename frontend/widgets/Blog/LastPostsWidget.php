@@ -8,7 +8,7 @@ class LastPostsWidget extends Widget
 {
     public $limit;
 
-    public function run(): string
+    public function run() : string
     {
         return $this->render('last-posts', [
             'posts' => Post::getLast($this->limit)

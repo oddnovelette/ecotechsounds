@@ -4,6 +4,7 @@
 /* @var $post src\models\Blog\Post */
 
 use frontend\widgets\Blog\BlogCommentsWidget;
+use frontend\widgets\Blog\LastPostsWidget;
 use src\models\User;
 use yii\helpers\Html;
 
@@ -21,8 +22,8 @@ foreach ($post->tags as $tag) {
 }
 ?>
 <article xmlns="http://www.w3.org/1999/html">
-    <p class="post-title"><span style="background-color: #333"><?= Html::encode($post->title) ?></span></p>
-    <p class="post-date"><span style="background-color: #333"><span class="glyphicon glyphicon-cd"></span>
+    <p class="post-title"><?= Html::encode($post->title) ?></p>
+    <p class="post-date"><span><span class="glyphicon glyphicon-cd"></span>
             <?= Yii::$app->formatter->format($post->created_at, 'relativeTime'); ?>
             in <?= Html::encode($post->category->name) ?> <?= Html::encode(strtoupper($post->language)) ?>&nbsp;&nbsp;
         <span class="glyphicon glyphicon-eye-open"></span> <?= $post->views_counter ?>
@@ -56,7 +57,7 @@ foreach ($post->tags as $tag) {
 
 
     <div class="well">
-        &nbsp;&nbsp;By <a href="#"> <?= Html::encode($post->user->username) ?></a>, <?= Yii::$app->formatter->format($post->created_at, 'relativeTime'); ?>
+        &nbsp;&nbsp;By <?= Html::a(Html::encode($post->user->username), ['users/view', 'id' => $post->user_id]) ?>, <?= Yii::$app->formatter->format($post->created_at, 'relativeTime'); ?>
         <?php if ($post->user->avatar): ?>
             <?= Html::img($post->user->getThumbFileUrl('avatar', 'thumb'), ['class' => 'img-circle img-card']) ?>
         <?php endif; ?><br>
@@ -66,9 +67,16 @@ foreach ($post->tags as $tag) {
 
 </div>
 <div class="clearfix"></div><br>
-<p>Tags: <?= implode(', ', $tagLinks) ?></p>
+<span class="pill-tag"><?= implode(' ', $tagLinks) ?></span>
 
 <?= BlogCommentsWidget::widget(['post' => $post]) ?>
+
+<h3 class="text-center">By the way:</h3><hr>
+<div class="row bg-1">
+    <?= LastPostsWidget::widget([
+        'limit' => 9,
+    ]) ?>
+</div><hr>
 
 
 <?php $this->registerJs("

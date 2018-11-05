@@ -31,13 +31,13 @@ $url = Url::to(['post', 'slug' => $model->slug]);
     <p class="post-text-preview"><?= Yii::$app->formatter->asNtext($model->description) ?></p>
 
     <div class="pill-author">
-        <?php if ($model->getUserModel($model->user_id)->avatar): ?>
-            <?= Html::img($model->getUserModel($model->user_id)->getThumbFileUrl('avatar', 'thumb'), ['class' => 'img-circle avatar-pill']) ?>
+        <?php if ($model->user->avatar): ?>
+            <?= Html::img($model->user->getThumbFileUrl('avatar', 'thumb'), ['class' => 'img-circle avatar-pill']) ?>
         <?php else: ?>
             <i class="fa fa-user-circle-o avatar-pill"></i>
         <?php endif; ?>
 
-        &nbsp;&nbsp;By <?= Html::a(Html::encode($model->getUserModel($model->user_id)->username), ['users/view', 'id' => $model->user_id]) ?>
+        &nbsp;&nbsp;By <?= Html::a(Html::encode($model->user->username), ['users/view', 'id' => $model->user_id]) ?>
          | <?= Yii::$app->formatter->format($model->created_at, 'relativeTime'); ?>
     </div>
 
