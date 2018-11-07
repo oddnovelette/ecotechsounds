@@ -4,3 +4,11 @@ $(window).on('load', function () {
     $spinner.fadeOut();
     $preloader.delay(350).fadeOut('slow');
 });
+
+$(window).scroll(function() {
+    if ($(window).scrollTop() > 10) {
+        $('.navbar').addClass('floatingNav');
+    } else {
+        $('.navbar').removeClass('floatingNav');
+    }
+});

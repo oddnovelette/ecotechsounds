@@ -45,7 +45,6 @@ AppAsset::register($this);
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="<?= Html::encode(Url::to('/magazine')) ?>">Magazine</a></li>
                 <li><a href="<?= Html::encode(Url::to('/users/index')) ?>">Users</a></li>
-                <li><a href="#band">Works</a></li>
 
                <?php if (Yii::$app->user->isGuest): ?>
                    <li><a href="<?= Html::encode(Url::to('/site/signup')) ?>">Join</a></li>

@@ -104,7 +104,7 @@ h2 {
 .navbar {
 	font-family: Montserrat, sans-serif;
 	margin-bottom: 0;
-	background-color: #333;
+	background-color: #2D323E;
 	border: 0;
 	font-weight: bold;
 	font-size: 11px !important;
@@ -112,22 +112,48 @@ h2 {
 	opacity: 0.9;
 	padding-right: 9%;
 	padding-left: 9%;
-	min-height: 44px;
-	height: 44px;
+}
+
+.floatingNav {
+	box-shadow: 0px 3px 5px #333;
+	background-color: #494E5A;
 }
 .navbar li a, .navbar .navbar-brand {
-	color: #d5d5d5 !important;
 	padding-top: 0;
 	padding-bottom: 0;
-	line-height: 40px;
+	line-height: 45px;
+}
+.navbar-default .navbar-nav > li > a {
+	color: #EEEEEE;
+}
 
+.navbar-nav .open .dropdown-menu {
+	background-color: #ffffff;
+}
+
+#postsearch-language {
+	padding-left: 8px;
+}
+.search {
+	padding-right: 0;
+	padding-left: 0;
+}
+.input-daterange input:first-child {
+	border-radius: 0;
+}
+.input-daterange input:last-child {
+	border-radius: 0;
+}
+.input-group.input-daterange .input-group-addon {
+	border: none;
+	background: #ffffff;
 }
 .navbar-nav li a:hover {
 	color: #fff !important;
 }
 .navbar-nav li.active a {
 	color: #fff !important;
-	background-color: #000000 !important;
+	background-color: #ffffff !important;
 }
 .navbar-default .navbar-toggle {
 	border-color: transparent;
@@ -138,13 +164,14 @@ h2 {
 
 .open .dropdown-toggle {
 	color: #fff;
-	background-color: #555 !important;
-}
-.dropdown-menu li a {
-	color: #000 !important;
+	background-color: #2D323E !important;
 }
 .dropdown-menu li a:hover {
-	background-color: #555555 !important;
+	background-color: #CCCCCC !important;
+}
+.dropdown-menu li a {
+	background-color: #ffffff;
+	color: #333333;
 }
 footer {
 	background-color: #464446;
@@ -294,7 +321,19 @@ a:hover {text-decoration: none;}
 	letter-spacing: 5px;
 }
 .post-title-list a, .post-title-list {
-    letter-spacing: 5px;
+    letter-spacing: 4px;
+	color: #333333;
+}
+.searchrow {
+	margin-bottom: 20px;
+	padding-top: 30px;
+	background: #F1F1F1;
+	margin-left: 1px;
+	margin-right: 1px;
+	border-left: 3px solid #ffffff;
+	border-right: 3px solid #ffffff;
+
+	border-top: 3px solid #666666;
 }
 .widget-posts, .widget-posts a {
 	font-size: 22px;
@@ -378,7 +417,16 @@ a:hover {text-decoration: none;}
 	font-weight: bold;
 }
 #myNavbar.navbar-collapse.collapse.in {
-	background: #333333;
+	background: #2D323E;
+}
+
+.navbar-right .dropdown-menu {
+	right: 0;
+	left: 0;
+}
+.dropdown-menu, .dropdown-menu a {
+	background: #fff;
+	color: #333333;
 }
 .pill-tag a {
 	font-weight: bold;

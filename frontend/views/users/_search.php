@@ -15,7 +15,7 @@ use yii\widgets\ActiveForm;
             'method' => 'get',
         ]); ?>
 
-        <?= $form->field($model, 'username')->textInput(['placeholder' => 'Find users by user name..'])->label('Active users search') ?>
+        <?= $form->field($model, 'username')->textInput(['placeholder' => 'Find users ..'])->label('Active users search') ?>
 
         <div>
             <?= Html::submitButton('<i class="fa fa-search"></i> Search', ['class' => 'btn btn-primary']) ?>

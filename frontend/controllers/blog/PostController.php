@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers\blog;
 
+use frontend\models\PostSearch;
 use src\forms\Blog\CommentForm;
 use src\models\Blog\{Category, Post, Tag};
 use src\services\Blog\CommentService;
@@ -27,8 +28,13 @@ class PostController extends Controller
 
     public function actionIndex()
     {
-        $dataProvider = Post::getAll();
-        return $this->render('index', ['dataProvider' => $dataProvider]);
+        $searchModel = new PostSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**

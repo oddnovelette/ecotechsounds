@@ -14,8 +14,8 @@ class PostHelper
     public static function languageList() : array
     {
         return [
-            Post::POST_LANG_EN => 'English',
-            Post::POST_LANG_RU => 'Russian',
+            Post::POST_LANG_EN => 'ENG',
+            Post::POST_LANG_RU => 'RU',
         ];
     }
 
