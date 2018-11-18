@@ -28,7 +28,7 @@ use yiidreamteam\upload\ImageUploadBehavior;
  * @property integer $type
  * @property integer $account_privacy
  * @property integer $email_privacy
- * @property string $custom_username
+ * @property string $user_from
  * @property string $real_name
  * @property string $real_surname
  * @property string $description
@@ -42,6 +42,7 @@ use yiidreamteam\upload\ImageUploadBehavior;
  * @property integer $updated_at
  * @property string $password write-only password
  * @property PostLike[] $postLikes
+ * @property Social[] $socials
  * @mixin ImageUploadBehavior
  */
 class User extends ActiveRecord implements IdentityInterface
@@ -88,11 +89,25 @@ class User extends ActiveRecord implements IdentityInterface
         return $user;
     }
 
+    public static function socialSignup(string $network, string $client_id) : self
+    {
+        $user = new self();
+        $user->status = self::STATUS_ACTIVE;
+        $user->auth_key = Yii::$app->security->generateRandomString();
+        $user->socials = [Social::create($network, $client_id)];
+        return $user;
+    }
+
+    public function getSocials() : ActiveQuery
+    {
+        return $this->hasMany(Social::class, ['user_id' => 'id']);
+    }
+
     public function edit(
         $username,
         $email,
         $description,
-        $custom_username,
+        $user_from,
         $real_name,
         $real_surname,
         $soundcloud_link, $discogs_link, $bandcamp_link) : void
@@ -100,7 +115,7 @@ class User extends ActiveRecord implements IdentityInterface
         $this->username = $username;
         $this->email = $email;
         $this->description = $description;
-        $this->custom_username = $custom_username;
+        $this->user_from = $user_from;
         $this->real_name = $real_name;
         $this->real_surname = $real_surname;
         $this->soundcloud_link = $soundcloud_link;
@@ -148,12 +163,13 @@ class User extends ActiveRecord implements IdentityInterface
                 'thumbs' => [
                     'thumb' => ['width' => 60, 'height' => 60],
                     'list' => ['width' => 100, 'height' => 100],
+                    'main' => ['width' => 200, 'height' => 200],
                 ],
             ],
             TimestampBehavior::class,
             [
                 'class' => SaveRelationsBehavior::class,
-                'relations' => ['postLikes'],
+                'relations' => ['postLikes', 'socials'],
             ],
         ];
     }
@@ -333,4 +349,10 @@ class User extends ActiveRecord implements IdentityInterface
         return new UserQuery(get_called_class());
     }
 
+    public function transactions()
+    {
+        return [
+            self::SCENARIO_DEFAULT => self::OP_ALL,
+        ];
+    }
 }

@@ -15,10 +15,10 @@ $url = Url::to(['post', 'slug' => $model->slug]);
 ]); ?>
 
 <div class="item">
-    <?php if ($model->photo): ?>
+    <?php if ($model->mainPhoto): ?>
         <div>
             <a href="<?= Html::encode($url) ?>">
-                <img src="<?= Html::encode($model->getThumbFileUrl('photo', 'thumb')) ?>" alt="" class="img-responsive" />
+                <img src="<?= Html::encode($model->mainPhoto->getThumbFileUrl('file', 'thumb')) ?>" alt="" class="img-responsive" />
             </a>
         </div>
     <?php endif; ?>

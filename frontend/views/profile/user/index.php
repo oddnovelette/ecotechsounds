@@ -34,7 +34,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'custom_username:ntext',
             'email:email',
             [
                 'label' => 'First name',
@@ -45,12 +44,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => $model->real_surname,
             ],
             [
+                'label' => '<i class="fa fa-map-marker"></i> From',
+                'value' => $model->user_from,
+            ],
+            [
                 'label' => '<i class="fa fa-soundcloud"></i> Soundcloud',
                 'value' => $model->soundcloud_link,
             ],
             [
                 'label' => '<i class="fa fa-bandcamp"></i> Bandcamp',
                 'value' => $model->bandcamp_link,
+            ],
+            [
+                'label' => '<span class="glyphicon glyphicon-cd"></span> Discogs',
+                'value' => $model->discogs_link,
             ],
         ],
     ]) ?>

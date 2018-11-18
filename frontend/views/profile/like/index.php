@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             [
                 'value' => function (Post $model) {
-                    return $model->photo ? Html::img($model->getThumbFileUrl('photo', 'admin')) : null;
+                    return $model->mainPhoto ? Html::img($model->mainPhoto->getThumbFileUrl('file', 'admin')) : null;
                 },
                 'format' => 'raw',
             ],

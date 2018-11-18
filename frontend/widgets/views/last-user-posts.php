@@ -14,14 +14,15 @@ use yii\helpers\StringHelper;
             <div class="panel panel-default">
 
                 <div class="panel-heading">
-                    <h1><?= Html::a(Html::encode($post->category->name), ['/blog/post/category', 'slug' => $post->category->slug]) ?>
-                        <i class="fa fa-chain post-date-lite"></i>
-                        <?= Html::a(Html::encode($post->title), ['/blog/post/post', 'slug' => $post->slug]) ?></h1>
+                    <h1 class="post-title-list"><?= Html::a(Html::encode($post->category->name), ['/blog/post/category', 'slug' => $post->category->slug]) ?>
+                        <i class="fa fa-long-arrow-right post-date-lite"></i>
+                        <?= Html::a(Html::encode($post->title), ['/blog/post/post', 'slug' => $post->slug]) ?>
+                    </h1>
                 </div>
                 <div class="panel-body">
-                    <?php if ($post->photo): ?>
+                    <?php if ($post->mainPhoto): ?>
                         <div class="lefter-thumb">
-                            <img src="<?= Html::encode($post->getThumbFileUrl('photo', 'widget_list')) ?>" alt="" class="img img-responsive img-rounded" />
+                            <img src="<?= Html::encode($post->mainPhoto->getThumbFileUrl('file', 'widget_list')) ?>" alt="" class="img img-responsive" />
                         </div>
                     <?php endif; ?>
 

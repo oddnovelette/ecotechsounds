@@ -45,7 +45,7 @@ class UserService
             $form->username,
             $form->email,
             $form->description,
-            $form->custom_username,
+            $form->user_from,
             $form->real_name,
             $form->real_surname,
             $form->soundcloud_link,

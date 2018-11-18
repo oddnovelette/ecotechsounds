@@ -41,6 +41,7 @@ use yiidreamteam\upload\ImageUploadBehavior;
  * @property Tag[] $tags
  * @property Comment[] $comments
  * @property PostLike[] $postLikes
+ * @property Photo[] $photos
  *
  * @mixin ImageUploadBehavior
  */
@@ -137,7 +138,7 @@ class Post extends ActiveRecord implements Linkable
         return Post::find()->published()->with('category')->orderBy(['views_counter' => SORT_DESC])->limit($limit)->all();
     }
 
-    public function getUser()
+    public function getUser() : ?ActiveQuery
     {
         return $this->hasOne(User::class, ['id' => 'user_id']);
     }
@@ -179,7 +180,86 @@ class Post extends ActiveRecord implements Linkable
         return $this->meta->title ?: $this->title;
     }
 
-    // Tags
+    /////////////////// Photos ///////////////////////
+
+    public function addPhoto(UploadedFile $file) : void
+    {
+        $photos = $this->photos;
+        $photos[] = Photo::create($file);
+        $this->updatePhotos($photos);
+    }
+
+    public function removePhoto($id) : void
+    {
+        $photos = $this->photos;
+        foreach ($photos as $i => $photo) {
+            if ($photo->isIdEqualTo($id)) {
+                unset($photos[$i]);
+                $this->updatePhotos($photos);
+                return;
+            }
+        }
+        throw new \DomainException('Photo is not found.');
+    }
+
+    public function removePhotos() : void
+    {
+        $this->updatePhotos([]);
+    }
+
+    public function movePhotoUp($id) : void
+    {
+        $photos = $this->photos;
+        foreach ($photos as $i => $photo) {
+            if ($photo->isIdEqualTo($id)) {
+                if ($prev = $photos[$i - 1] ?? null) {
+                    $photos[$i - 1] = $photo;
+                    $photos[$i] = $prev;
+                    $this->updatePhotos($photos);
+                }
+                return;
+            }
+        }
+        throw new \DomainException('Photo is not found.');
+    }
+
+    public function movePhotoDown($id) : void
+    {
+        $photos = $this->photos;
+        foreach ($photos as $i => $photo) {
+            if ($photo->isIdEqualTo($id)) {
+                if ($next = $photos[$i + 1] ?? null) {
+                    $photos[$i] = $next;
+                    $photos[$i + 1] = $photo;
+                    $this->updatePhotos($photos);
+                }
+                return;
+            }
+        }
+        throw new \DomainException('Photo is not found.');
+    }
+
+    private function updatePhotos(array $photos) : void
+    {
+        foreach ($photos as $i => $photo) {
+            $photo->setSort($i);
+        }
+
+        $this->photos = $photos;
+        $this->populateRelation('mainPhoto', reset($photos));
+    }
+
+    public function getPhotos() : ActiveQuery
+    {
+        return $this->hasMany(Photo::class, ['post_id' => 'id'])->orderBy('sort');
+    }
+
+    public function getMainPhoto() : ActiveQuery
+    {
+        return $this->hasOne(Photo::class, ['id' => 'main_photo_id']);
+    }
+
+    /////////////////////// Tags ////////////////////////////
     public function assignTag($id) : void
     {
         $assignments = $this->tagAssignments;
@@ -350,11 +430,6 @@ class Post extends ActiveRecord implements Linkable
         return '{{%blog_posts}}';
     }
 
-    public function setPhoto(UploadedFile $photo) : void
-    {
-        $this->photo = $photo;
-    }
-
     public static function find() : PostQuery
     {
         return new PostQuery(static::class);
@@ -384,23 +459,7 @@ class Post extends ActiveRecord implements Linkable
             MetaTagsBehavior::class,
             [
                 'class' => SaveRelationsBehavior::class,
-                'relations' => ['tagAssignments', 'comments'],
-            ],
-            [
-                'class' => ImageUploadBehavior::class,
-                'attribute' => 'photo',
-                'createThumbsOnRequest' => true,
-                'filePath' => '@uploadsRoot/origin/posts/[[id]].[[extension]]',
-                'fileUrl' => '@uploads/origin/posts/[[id]].[[extension]]',
-                'thumbPath' => '@uploadsRoot/cache/posts/[[profile]]_[[id]].[[extension]]',
-                'thumbUrl' => '@uploads/cache/posts/[[profile]]_[[id]].[[extension]]',
-                'thumbs' => [
-                    'admin' => ['width' => 100, 'height' => 70],
-                    'thumb' => ['width' => 640, 'height' => 480],
-                    'blog_list' => ['width' => 1000, 'height' => 600],
-                    'widget_list' => ['width' => 300, 'height' => 300],
-                    'origin' => ['width' => 1000, 'height' => 600],
-                ],
+                'relations' => ['tagAssignments', 'comments', 'photos'],
             ],
         ];
     }
@@ -424,5 +483,26 @@ class Post extends ActiveRecord implements Linkable
         return [
             self::SCENARIO_DEFAULT => self::OP_ALL,
         ];
+    }
+
+    public function beforeDelete() : bool
+    {
+        if (parent::beforeDelete()) {
+            foreach ($this->photos as $photo) {
+                $photo->delete();
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public function afterSave($insert, $changedAttributes) : void
+    {
+        $related = $this->getRelatedRecords();
+        parent::afterSave($insert, $changedAttributes);
+
+        if (array_key_exists('mainPhoto', $related)) {
+            $this->updateAttributes(['main_photo_id' => $related['mainPhoto'] ? $related['mainPhoto']->id : null]);
+        }
     }
 }

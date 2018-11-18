@@ -5,6 +5,28 @@ return [
         '@npm'   => '@vendor/npm-asset',
     ],
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
+    'name' => 'ecotechsounds',
+    'controllerMap' => [
+        'elfinder' => [
+            'class' => 'mihaildev\elfinder\Controller',
+            'access' => ['@'],
+            'plugin' => [
+                [
+                    'class'=>'\mihaildev\elfinder\plugin\Sluggable',
+                    'lowercase' => true,
+                    'replacement' => '-'
+                ]
+            ],
+            'roots' => [
+                [
+                    'baseUrl'=>'@uploads',
+                    'basePath'=>'@uploadsRoot',
+                    'path' => 'files',
+                    'name' => 'Global'
+                ],
+            ],
+        ],
+    ],
     'components' => [
         'cache' => [
             'class' => 'yii\redis\Cache',

@@ -1,6 +1,7 @@
 <?php
 
 use kartik\file\FileInput;
+use mihaildev\ckeditor\CKEditor;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
@@ -20,9 +21,9 @@ use yii\bootstrap\ActiveForm;
             <div class="panel panel-default">
                 <div class="panel-heading">Post info</div>
                 <div class="panel-body">
-                    <?= $form->field($model, 'categoryId')->dropDownList($model->categoriesList(), ['prompt' => '']) ?>
+                    <?= $form->field($model, 'categoryId')->dropDownList($model->categoriesList(), ['prompt' => ''])->label('Category*') ?>
 
-                    <?= $form->field($model, 'language')->dropDownList($model->languageList(), ['prompt' => '']) ?>
+                    <?= $form->field($model, 'language')->dropDownList($model->languageList(), ['prompt' => ''])->label('Language*') ?>
                 </div>
             </div>
         </div>
@@ -40,14 +41,14 @@ use yii\bootstrap\ActiveForm;
     </div>
     <div class="panel panel-default">
         <div class="panel-body">
-            <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'title')->textInput(['maxlength' => true])->label('Post title*') ?>
             <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'description')->textarea(['rows' => 5]) ?>
-            <?= $form->field($model, 'content')->textarea(['rows' => 20]) ?>
+            <?= $form->field($model, 'content')->widget(CKEditor::class) ?>
         </div>
     </div>
     <div class="panel panel-default">
-        <div class="panel-heading">Photo</div>
+        <div class="panel-heading">Post Photo (Max 3 images for post will be shown)</div>
         <div class="panel-body">
             <?= $form->field($model, 'photo')->label(false)->widget(FileInput::class, [
                 'options' => [

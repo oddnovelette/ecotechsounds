@@ -1,5 +1,6 @@
 <?php
 
+use mihaildev\ckeditor\CKEditor;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -16,7 +17,7 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'sort')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($model, 'content')->textarea(['rows' => 10]) ?>
+            <?= $form->field($model, 'content')->widget(CKEditor::class) ?>
         </div>
     </div>
     <div class="box box-default">

@@ -23,7 +23,7 @@ foreach ($post->tags as $tag) {
 ?>
 <article xmlns="http://www.w3.org/1999/html">
     <p class="post-title"><?= Html::encode($post->title) ?></p>
-    <p class="post-date"><span><span class="glyphicon glyphicon-cd"></span>
+    <p class="post-date"><span><span class="glyphicon glyphicon-pencil"></span>
             <?= Yii::$app->formatter->format($post->created_at, 'relativeTime'); ?>
             in <?= Html::encode($post->category->name) ?> <?= Html::encode(strtoupper($post->language)) ?>&nbsp;&nbsp;
         <span class="glyphicon glyphicon-eye-open"></span> <?= $post->views_counter ?>
@@ -31,11 +31,52 @@ foreach ($post->tags as $tag) {
         <span class="glyphicon glyphicon-heart"></span> <?= $post->likes_counter ?></span>
     </p>
 
-    <?php if ($post->photo): ?>
-        <p><img src="<?= Html::encode($post->getThumbFileUrl('photo', 'origin')) ?>" alt="" class="img-responsive" /></p>
-    <?php endif; ?>
+    <div class="row">
+        <?php if (!empty($post->photos[1]) && !empty($post->photos[2])): ?>
+        <div class="col-md-8">
+        <?php elseif (!empty($post->photos[1]) && empty($post->photos[2])): ?>
+        <div class="col-md-6">
+        <?php else: ?>
+        <div class="col-md-12">
+        <?php endif; ?>
+            <?php if ($post->mainPhoto): ?>
+                <p><img src="<?= Html::encode($post->mainPhoto->getThumbFileUrl('file', 'origin')) ?>" alt="<?= Html::encode($post->title) ?>" class="img img-responsive" style="margin: 0 auto;" /></p>
+            <?php endif; ?>
+        </div>
 
-    <p class="post-text"><?= Yii::$app->formatter->asNtext($post->content) ?></p>
+
+    <?php foreach ($post->photos as $i => $photo): ?>
+        <?php if ($i == 1): ?>
+            <?php if (empty($post->photos[2])): ?>
+                <div class="col-md-6">
+            <?php endif; ?>
+            <?php if (!empty($post->photos[2])): ?>
+                <div class="col-md-4">
+            <?php endif; ?>
+
+            <a class="thumbnail" href="<?= $photo->getUploadedFileUrl('file') ?>" title="">
+                <img src="<?= $photo->getThumbFileUrl('file', 'thumb') ?>" class="img img-responsive" alt="" />
+            </a>
+        </div>
+
+        <?php elseif ($i == 2): ?>
+            <div class="col-md-4">
+                <a class="thumbnail" href="<?= $photo->getUploadedFileUrl('file') ?>" title="">
+                    <img src="<?= $photo->getThumbFileUrl('file', 'thumb') ?>" class="img img-responsive" alt="" />
+                </a>
+            </div>
+        <?php endif; ?>
+    <?php endforeach; ?>
+
+    </div>
+
+    <p class="post-text"><?= Yii::$app->formatter->asHtml($post->content, [
+            'Attr.AllowedRel' => array('nofollow'),
+            'HTML.SafeObject' => true,
+            'Output.FlashCompat' => true,
+            'HTML.SafeIframe' => true,
+            'URI.SafeIframeRegexp'=>'%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%',
+        ]) ?></p>
 </article>
 
 <div class="row post-credentials">

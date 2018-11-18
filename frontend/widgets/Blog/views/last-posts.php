@@ -12,10 +12,10 @@ use yii\helpers\Url;
         <?php $url = Url::to(['/blog/post/post', 'slug' => $post->slug]); ?>
         <div class="post-layout col-lg-4 col-md-4 col-sm-6 col-xs-12">
 
-                <?php if ($post->photo): ?>
+                <?php if ($post->mainPhoto): ?>
                     <div class="image">
                         <a href="<?= Html::encode($url) ?>">
-                            <img src="<?= Html::encode($post->getThumbFileUrl('photo', 'widget_list')) ?>" alt="" class="img-responsive" />
+                            <img src="<?= Html::encode($post->mainPhoto->getThumbFileUrl('file', 'widget_list')) ?>" alt="" class="img-responsive" />
                         </a>
                     </div>
                 <?php endif; ?>

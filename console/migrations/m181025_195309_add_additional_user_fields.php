@@ -16,7 +16,7 @@ class m181025_195309_add_additional_user_fields extends Migration
         $this->addColumn('{{%users}}', 'type', $this->smallInteger()->notNull()->defaultValue(0)); // resident, customer etc.
         $this->addColumn('{{%users}}', 'account_privacy', $this->smallInteger()->notNull()->defaultValue(0)); // public account if(1)
         $this->addColumn('{{%users}}', 'email_privacy', $this->smallInteger()->notNull()->defaultValue(0)); // public email if(1)
-        $this->addColumn('{{%users}}', 'custom_username', $this->string(50));
+        $this->addColumn('{{%users}}', 'user_from', $this->string(50));
         $this->addColumn('{{%users}}', 'real_name', $this->string(50));
         $this->addColumn('{{%users}}', 'real_surname', $this->string(50));
         $this->addColumn('{{%users}}', 'description', $this->string());
@@ -35,7 +35,7 @@ class m181025_195309_add_additional_user_fields extends Migration
         $this->dropColumn('{{%users}}', 'type');
         $this->dropColumn('{{%users}}', 'account_privacy');
         $this->dropColumn('{{%users}}', 'email_privacy');
-        $this->dropColumn('{{%users}}', 'custom_username');
+        $this->dropColumn('{{%users}}', 'user_from');
         $this->dropColumn('{{%users}}', 'real_name');
         $this->dropColumn('{{%users}}', 'real_surname');
         $this->dropColumn('{{%users}}', 'description');

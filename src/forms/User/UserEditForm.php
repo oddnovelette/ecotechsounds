@@ -13,7 +13,7 @@ class UserEditForm extends Model
 {
     public $username;
     public $email;
-    public $custom_username;
+    public $user_from;
     public $real_name;
     public $real_surname;
     public $avatar;
@@ -30,16 +30,16 @@ class UserEditForm extends Model
      */
     public function __construct(User $user, array $config = [])
     {
-        $this->username = $user->username;
-        $this->email = $user->email;
-        $this->custom_username = $user->custom_username;
-        $this->real_name = $user->custom_username;
-        $this->real_surname = $user->custom_username;
-        $this->description = $user->description;
-        $this->soundcloud_link = $user->soundcloud_link;
-        $this->discogs_link = $user->discogs_link;
-        $this->bandcamp_link = $user->bandcamp_link;
-        $this->_user = $user;
+        $this->username         = $user->username;
+        $this->email            = $user->email;
+        $this->user_from        = $user->user_from;
+        $this->real_name        = $user->real_name;
+        $this->real_surname     = $user->real_surname;
+        $this->description      = $user->description;
+        $this->soundcloud_link  = $user->soundcloud_link;
+        $this->discogs_link     = $user->discogs_link;
+        $this->bandcamp_link    = $user->bandcamp_link;
+        $this->_user            = $user;
         parent::__construct($config);
     }
 
@@ -48,7 +48,8 @@ class UserEditForm extends Model
         return [
             [['username', 'email'], 'required'],
             ['email', 'email'],
-            [['description', 'custom_username', 'real_name', 'real_surname', 'soundcloud_link', 'discogs_link', 'bandcamp_link'], 'string', 'max' => 255],
+            [['description', 'soundcloud_link', 'discogs_link', 'bandcamp_link'], 'string', 'max' => 255],
+            [['user_from', 'real_name', 'real_surname'], 'string', 'max' => 30],
             [['avatar'], 'image'],
             [['username', 'email'], 'unique', 'targetClass' => User::class, 'filter' => ['<>', 'id', $this->_user->id]],
 

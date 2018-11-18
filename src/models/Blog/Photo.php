@@ -1,5 +1,5 @@
 <?php
-namespace src\models\Store;
+namespace src\models\Blog;
 
 use yii\db\ActiveRecord;
 use yii\web\UploadedFile;
@@ -32,7 +32,7 @@ class Photo extends ActiveRecord
 
     public static function tableName() : string
     {
-        return '{{%store_photos}}';
+        return '{{%post_photos}}';
     }
 
     public function behaviors() : array
@@ -42,16 +42,16 @@ class Photo extends ActiveRecord
                 'class' => ImageUploadBehavior::class,
                 'attribute' => 'file',
                 'createThumbsOnRequest' => true,
-                'filePath' => '@uploadsRoot/origin/products/[[attribute_product_id]]/[[id]].[[extension]]',
-                'fileUrl' => '@uploads/origin/products/[[attribute_product_id]]/[[id]].[[extension]]',
-                'thumbPath' => '@uploadsRoot/cache/products/[[attribute_product_id]]/[[profile]]_[[id]].[[extension]]',
-                'thumbUrl' => '@uploads/cache/products/[[attribute_product_id]]/[[profile]]_[[id]].[[extension]]',
+                'filePath' => '@uploadsRoot/origin/posts/[[id]].[[extension]]',
+                'fileUrl' => '@uploads/origin/posts/[[id]].[[extension]]',
+                'thumbPath' => '@uploadsRoot/cache/posts/[[profile]]_[[id]].[[extension]]',
+                'thumbUrl' => '@uploads/cache/posts/[[profile]]_[[id]].[[extension]]',
                 'thumbs' => [
                     'admin' => ['width' => 100, 'height' => 70],
-                    'thumb' => ['width' => 640, 'height' => 480],
-                    'store_list' => ['width' => 200, 'height' => 200],
-                    'store_prod_main' => ['width' => 750, 'height' => 1000],
-                    'store_prod_additional' => ['width' => 80, 'height' => 80],
+                    'thumb' => ['width' => 640, 'height' => 490],
+                    'blog_list' => ['width' => 1000, 'height' => 600],
+                    'widget_list' => ['width' => 300, 'height' => 300],
+                    'origin' => ['width' => 1000, 'height' => 600],
                 ],
             ],
         ];

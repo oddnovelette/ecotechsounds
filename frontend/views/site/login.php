@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     Forgot your password? You can <?= Html::a('reset it', ['site/request-password-reset']) ?>.
                 </div>
                 <div style="color:#999;margin:1em 0">
-                    Dont have a profile? <?= Html::a('Sign up', ['site/signup']) ?>.
+                    Don`t have an account? <?= Html::a('Sign up', ['site/signup']) ?>.
                 </div>
 
             <?php ActiveForm::end(); ?>

@@ -9,8 +9,8 @@ use yii\helpers\Html;
 
 $this->title = 'Profile Settings';
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['users/index']];
-$this->params['breadcrumbs'][] = ['label' => $model->username, 'url' => ['users/view', 'id' => $user->id]];
-$this->params['breadcrumbs'][] = ['label' => 'Profile', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->username, 'url' => ['profile/user/view', 'id' => $user->id]];
+$this->params['breadcrumbs'][] = ['label' => 'Profile', 'url' => ['profile/user/view', 'id' => $user->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-update col-sm-10">
@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= $form->field($model, 'username')->textInput(['disabled' => true])->label('') ?>
         </div>
         <div class="col-sm-6">
-    <?= $form->field($model, 'custom_username')->textInput(['placeholder' => 'Your pseudonym'])->label('Pseudonym (shown instead of the login name)') ?>
+    <?= $form->field($model, 'user_from')->textInput(['placeholder' => 'From'])->label('Your location') ?>
         </div>
     </div><hr>
 

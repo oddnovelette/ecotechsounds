@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = 'Update';
         </div>
     </div>
     <div class="box box-default">
-        <div class="box-header with-border">SEO</div>
+        <div class="box-header with-border">Meta tags & SEO</div>
         <div class="box-body">
             <?= $form->field($model->meta, 'title')->textInput() ?>
             <?= $form->field($model->meta, 'description')->textarea(['rows' => 2]) ?>

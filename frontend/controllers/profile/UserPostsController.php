@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers\profile;
 
+use src\forms\Blog\PhotosForm;
 use src\forms\Blog\PostForm;
 use src\models\Blog\Post;
 use src\services\Blog\BlogService;
@@ -43,6 +44,8 @@ class UserPostsController extends Controller
                     'delete' => ['POST'],
                     'publish' => ['POST'],
                     'draft' => ['POST'],
+                    'move-photo-up' => ['POST'],
+                    'move-photo-down' => ['POST'],
                     'delete-photo' => ['POST'],
                 ],
             ],
@@ -70,10 +73,23 @@ class UserPostsController extends Controller
      */
     public function actionView($id)
     {
+        $post = $this->findModel($id);
+        $photosForm = new PhotosForm();
+        if ($photosForm->load(Yii::$app->request->post()) && $photosForm->validate()) {
+            try {
+                $this->blogService->addPhotos($post->id, $photosForm);
+                return $this->redirect(['view', 'id' => $post->id]);
+            } catch (\DomainException $e) {
+                Yii::$app->errorHandler->logException($e);
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
+        }
         return $this->render('view', [
-            'post' => $this->findModel($id),
+            'post' => $post,
+            'photosForm' => $photosForm,
         ]);
     }
+
     /**
      * @return mixed
      */
@@ -156,6 +172,41 @@ class UserPostsController extends Controller
             Yii::$app->session->setFlash('error', $e->getMessage());
         }
         return $this->redirect(['view', 'id' => $id]);
+    }
+
+    /**
+     * @param integer $id
+     * @param $photo_id
+     * @return mixed
+     */
+    public function actionDeletePhoto($id, $photo_id)
+    {
+        try {
+            $this->blogService->removePhoto($id, $photo_id);
+        } catch (\DomainException $e) {
+            Yii::$app->session->setFlash('error', $e->getMessage());
+        }
+        return $this->redirect(['view', 'id' => $id, '#' => 'photos']);
+    }
+    /**
+     * @param integer $id
+     * @param $photo_id
+     * @return mixed
+     */
+    public function actionMovePhotoUp($id, $photo_id)
+    {
+        $this->blogService->movePhotoUp($id, $photo_id);
+        return $this->redirect(['view', 'id' => $id, '#' => 'photos']);
+    }
+    /**
+     * @param integer $id
+     * @param $photo_id
+     * @return mixed
+     */
+    public function actionMovePhotoDown($id, $photo_id)
+    {
+        $this->blogService->movePhotoDown($id, $photo_id);
+        return $this->redirect(['view', 'id' => $id, '#' => 'photos']);
     }
 
     /**

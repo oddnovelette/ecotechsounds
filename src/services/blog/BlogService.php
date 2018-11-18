@@ -1,7 +1,7 @@
 <?php
 namespace src\services\Blog;
 
-use src\forms\Blog\PostForm;
+use src\forms\Blog\{PostForm, PhotosForm};
 use src\models\Blog\{Category, Post, Tag};
 use src\models\Meta;
 
@@ -27,7 +27,9 @@ class BlogService
             new Meta($form->meta->title, $form->meta->description, $form->meta->keywords)
         );
 
-        if ($form->photo) $post->setPhoto($form->photo);
+        foreach ($form->photos->files as $file) {
+            $post->addPhoto($file);
+        }
 
         foreach ($form->tags->existing as $tagId) {
             if (!$tag = Tag::findOne($tagId)) {
@@ -73,8 +75,6 @@ class BlogService
             new Meta($form->meta->title, $form->meta->description, $form->meta->keywords)
         );
 
-        if ($form->photo) $post->setPhoto($form->photo);
-
         \Yii::$app->db->transaction(function () use ($post, $form) {
 
             $post->revokeTags();
@@ -103,6 +103,60 @@ class BlogService
             }
         });
         return;
+    }
+
+    public function addPhotos($id, PhotosForm $form) : void
+    {
+        if (!$product = Post::findOne($id)) {
+            throw new \RuntimeException('Post is not found.');
+        }
+
+        foreach ($form->files as $file) {
+            $product->addPhoto($file);
+        }
+
+        if (!$product->save()) {
+            throw new \RuntimeException('Post saving error.');
+        }
+    }
+
+    public function movePhotoUp($id, $photoId) : void
+    {
+        if (!$product = Post::findOne($id)) {
+            throw new \RuntimeException('Post is not found.');
+        }
+
+        $product->movePhotoUp($photoId);
+
+        if (!$product->save()) {
+            throw new \RuntimeException('Post saving error.');
+        }
+    }
+
+    public function movePhotoDown($id, $photoId) : void
+    {
+        if (!$product = Post::findOne($id)) {
+            throw new \RuntimeException('Post is not found.');
+        }
+
+        $product->movePhotoDown($photoId);
+
+        if (!$product->save()) {
+            throw new \RuntimeException('Post saving error.');
+        }
+    }
+
+    public function removePhoto($id, $photoId) : void
+    {
+        if (!$product = Post::findOne($id)) {
+            throw new \RuntimeException('Post is not found.');
+        }
+
+        $product->removePhoto($photoId);
+
+        if (!$product->save()) {
+            throw new \RuntimeException('Post saving error.');
+        }
     }
 
     public function publishPost($id) : void
