@@ -8,8 +8,8 @@
                 <img src="https://t4.ftcdn.net/jpg/02/06/12/43/160_F_206124303_p6rm6135nqCP5bUhyuOCseKwfnNEGG8w.jpg" class="img-circle" alt="User Image"/>
             </div>
             <div class="pull-left info">
-                <p><?= Yii::$app->user->identity->username ?></p>
-                <p><?= Yii::$app->request->userIP ?></p>
+                <p>
+                    <?= Yii::$app->request->userIP ?></p>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -39,6 +39,12 @@
                     ['label' => 'Files', 'icon' => 'files-o', 'url' => ['/file/index'], 'active' => $this->context->id == 'file'],
                 ],
             ]
+        ) ?>
+
+        <?= yii\helpers\Html::a(
+            'Sign out',
+            ['/site/logout'],
+            ['data-method' => 'post']
         ) ?>
 
     </section>

@@ -2,7 +2,9 @@
 namespace src\forms\User;
 
 use src\models\User;
+use Yii;
 use yii\base\Model;
+use yii\helpers\ArrayHelper;
 use yii\web\UploadedFile;
 
 /**
@@ -13,6 +15,7 @@ class UserEditForm extends Model
 {
     public $username;
     public $email;
+    public $role;
     public $user_from;
     public $real_name;
     public $real_surname;
@@ -30,23 +33,26 @@ class UserEditForm extends Model
      */
     public function __construct(User $user, array $config = [])
     {
-        $this->username         = $user->username;
-        $this->email            = $user->email;
-        $this->user_from        = $user->user_from;
-        $this->real_name        = $user->real_name;
-        $this->real_surname     = $user->real_surname;
-        $this->description      = $user->description;
-        $this->soundcloud_link  = $user->soundcloud_link;
-        $this->discogs_link     = $user->discogs_link;
-        $this->bandcamp_link    = $user->bandcamp_link;
-        $this->_user            = $user;
+        $this->username = $user->username;
+        $this->email = $user->email;
+        $roles = Yii::$app->authManager->getRolesByUser($user->id);
+        $this->role = $roles ? reset($roles)->name : null;
+        $this->user_from = $user->user_from;
+        $this->real_name = $user->real_name;
+        $this->real_surname = $user->real_surname;
+        $this->description = $user->description;
+        $this->soundcloud_link = $user->soundcloud_link;
+        $this->discogs_link = $user->discogs_link;
+        $this->bandcamp_link = $user->bandcamp_link;
+        $this->_user = $user;
+
         parent::__construct($config);
     }
 
     public function rules() : array
     {
         return [
-            [['username', 'email'], 'required'],
+            [['username', 'email', 'role'], 'required'],
             ['email', 'email'],
             [['description', 'soundcloud_link', 'discogs_link', 'bandcamp_link'], 'string', 'max' => 255],
             [['user_from', 'real_name', 'real_surname'], 'string', 'max' => 30],
@@ -63,5 +69,10 @@ class UserEditForm extends Model
             return true;
         }
         return false;
+    }
+
+    public function rolesList() : array
+    {
+        return ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'description');
     }
 }

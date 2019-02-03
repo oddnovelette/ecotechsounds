@@ -1,5 +1,6 @@
 <?php
 
+use backend\widgets\RoleColumn;
 use src\helpers\UserHelper;
 use src\models\User;
 use kartik\date\DatePicker;
@@ -48,6 +49,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         'format' => 'raw',
                     ],
                     'email:email',
+                    [
+                        'attribute' => 'role',
+                        'class' => RoleColumn::class,
+                        'filter' => $searchModel->rolesList(),
+                    ],
                     [
                         'attribute' => 'status',
                         'filter' => UserHelper::statusList(),

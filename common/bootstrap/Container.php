@@ -6,6 +6,7 @@ use mihaildev\elfinder\ElFinder;
 use src\services\FeedbackService;
 use yii\base\BootstrapInterface;
 use yii\mail\MailerInterface;
+use yii\rbac\ManagerInterface;
 
 /**
  * Class Container
@@ -27,6 +28,10 @@ class Container implements BootstrapInterface
 
         $container->setSingleton(MailerInterface::class, function () use ($app) {
             return $app->mailer;
+        });
+
+        $container->setSingleton(ManagerInterface::class, function () use ($app) {
+            return $app->authManager;
         });
 
         $container->setSingleton(FeedbackService::class, [], [

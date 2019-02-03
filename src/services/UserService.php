@@ -10,18 +10,33 @@ use src\models\User;
  */
 class UserService
 {
+    private $roles;
+
+    /**
+     * UserService constructor.
+     * @param RoleManager $roles
+     */
+    public function __construct(RoleManager $roles)
+    {
+        $this->roles = $roles;
+    }
+
     /**
      * User manual creating method
      * @param UserCreateForm $form
      * @return User
      * @throws \RuntimeException
      */
-    public static function create(UserCreateForm $form) : User
+    public function create(UserCreateForm $form) : User
     {
         $user = User::create($form->username, $form->email, $form->password);
-        if (!$user->save()) {
-            throw new \RuntimeException('User creating error occured.');
-        }
+
+        \Yii::$app->db->transaction(function () use ($user, $form) {
+            if (!$user->save()) {
+                throw new \RuntimeException('User creating error occured.');
+            }
+            $this->roles->assign($user->id, $form->role);
+        });
 
         return $user;
     }
@@ -34,7 +49,7 @@ class UserService
      * @throws \DomainException
      * @throws \RuntimeException
      */
-    public static function edit(int $id, UserEditForm $form) : void
+    public function edit(int $id, UserEditForm $form) : void
     {
         $user = User::findOne(['id' => $id]);
         if (!$user) {
@@ -54,8 +69,28 @@ class UserService
         );
 
         if ($form->avatar) $user->setAvatar($form->avatar);
-        if (!$user->save()) {
-            throw new \RuntimeException('Editing error occured.');
-        }
+
+        \Yii::$app->db->transaction(function () use ($user, $form) {
+            if (!$user->save()) {
+                throw new \RuntimeException('Editing error occured.');
+            }
+            $this->roles->assign($user->id, $form->role);
+        });
+    }
+
+    public function assignRole($id, $role) : void
+    {
+        $user = User::findOne(['id' => $id]);
+        if (!$user) throw new \DomainException('User is not found.');
+
+        $this->roles->assign($user->id, $role);
+    }
+
+    public function remove($id) : void
+    {
+        $user = User::findOne(['id' => $id]);
+        if (!$user) throw new \DomainException('User is not found.');
+
+        $this->repository->remove($user);
     }
 }

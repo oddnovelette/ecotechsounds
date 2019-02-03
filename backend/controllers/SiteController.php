@@ -7,6 +7,7 @@ use yii\base\Module;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use src\forms\LoginForm;
+use yii\web\ForbiddenHttpException;
 
 /**
  * Class SiteController
@@ -56,13 +57,11 @@ class SiteController extends Controller
         ];
     }
 
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
     public function actionIndex()
     {
+        if (!Yii::$app->authManager->checkAccess(Yii::$app->user->id, 'admin')) {
+            return $this->actionLogin();
+        }
         return $this->render('index');
     }
 
@@ -73,18 +72,18 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
         $this->layout = 'main-login';
 
         $form = new LoginForm();
+
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $user = $this->authService->auth($form);
                 Yii::$app->user->login($user, $form->rememberMe ? 3600 * 24 * 30 : 0);
                 return $this->goBack();
             } catch (\DomainException $e) {
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            } catch (ForbiddenHttpException $e) {
                 Yii::$app->session->setFlash('error', $e->getMessage());
             }
         }

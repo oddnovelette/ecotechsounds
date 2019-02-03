@@ -3,6 +3,7 @@ namespace src\services;
 
 use src\models\User;
 use src\forms\LoginForm;
+use yii\web\ForbiddenHttpException;
 
 /**
  * Class AuthService
@@ -13,6 +14,11 @@ class AuthService
     public function auth(LoginForm $form) : User
     {
         $user = $this->findByUsernameOrEmail($form->username);
+
+        if (!\Yii::$app->authManager->checkAccess($user->id, 'admin')) {
+            throw new ForbiddenHttpException('Forbidden: 403');
+        }
+
         if (!$user || !User::STATUS_ACTIVE || !$user->validatePassword($form->password)) {
             throw new \DomainException('Incorrect user or password.');
         }

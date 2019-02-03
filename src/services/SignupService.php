@@ -1,6 +1,7 @@
 <?php
 namespace src\services;
 
+use src\access\Rbac;
 use src\models\User;
 use src\forms\SignupForm;
 use yii\mail\MailerInterface;
@@ -11,11 +12,17 @@ use yii\mail\MailerInterface;
  */
 class SignupService
 {
-    private $mailer;
+    private $mailer, $roles;
 
-    public function __construct(MailerInterface $mailer)
+    /**
+     * SignupService constructor.
+     * @param MailerInterface $mailer
+     * @param RoleManager $roles
+     */
+    public function __construct(MailerInterface $mailer, RoleManager $roles)
     {
         $this->mailer = $mailer;
+        $this->roles = $roles;
     }
 
     /**
@@ -27,9 +34,13 @@ class SignupService
     public function signup(SignupForm $form) : void
     {
         $user = User::initiateUsersSignup($form->username, $form->email, $form->password);
-        if (!$user->save()) {
-            throw new \RuntimeException('User signup error occured.');
-        }
+
+        \Yii::$app->db->transaction(function () use ($user, $form) {
+            if (!$user->save()) {
+                throw new \RuntimeException('User signup error occured.');
+            }
+            $this->roles->assign($user->id, Rbac::ROLE_USER);
+        });
 
         $sent = $this->mailer->compose(
                 ['html' => 'emailConfirmToken-html', 'text' => 'emailConfirmToken-text'],

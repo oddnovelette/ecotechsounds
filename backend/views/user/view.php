@@ -1,6 +1,7 @@
 <?php
 
 use src\helpers\UserHelper;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -17,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Are you sure you want to delete this user?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -33,6 +34,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'status',
                         'value' => UserHelper::statusLabel($model->status),
+                        'format' => 'raw',
+                    ],
+                    [
+                        'label' => 'Role',
+                        'value' => implode(', ', ArrayHelper::getColumn(Yii::$app->authManager->getRolesByUser($model->id), 'description')),
                         'format' => 'raw',
                     ],
                     'created_at:datetime',
